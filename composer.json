@@ -1,0 +1,36 @@
+{
+  "name": "adbutler/adbutler-php",
+  "description": "AdButler PHP Library",
+  "keywords": [
+    "adbutler",
+    "ad serving",
+    "api"
+  ],
+  "homepage": "https://adbutler.com/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "SparkLIT and contributors",
+      "homepage": "https://github.com/adbutler/adbutler-php/graphs/contributors"
+    }
+  ],
+  "support": {
+    "email": "api@adbutler.com",
+    "docs": "http://adbutler.com/docs/api/?php"
+  },
+  "require": {
+    "php": ">=5.3.3",
+    "ext-curl": "*",
+    "ext-json": "*",
+    "ext-mbstring": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "AdButler\\" : ["lib/", "lib/Resource"]
+    },
+    "files": ["lib/Utils.php"]
+  }
+}
