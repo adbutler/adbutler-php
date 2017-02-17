@@ -5,24 +5,21 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/adbutler/adbutler-php.svg?style=flat-square)](https://packagist.org/packages/adbutler/adbutler-php)
 [![License](https://img.shields.io/github/license/adbutler/adbutler-php.svg?style=flat-square)](https://github.com/adbutler/adbutler-php/blob/master/LICENSE)
 
-You can [sign up](https://adbutler.com/pricing.spark) for an AdButler account.
+You can sign up for an AdButler account at [https://adbutler.com](https://adbutler.com).
+
+If you are looking for documentation, go here: [https://adbutler.com/docs/api?php](https://adbutler.com/docs/api?php)
+
+## Beta
+This project is currently in closed beta, but is considered fully functional.
+You may request an API key here: [https://getfoureyes.com/s/a3leK/](https://getfoureyes.com/s/a3leK/)
 
 ## Requirements
+  1. [AdButler account](https://adbutler.com/)
+  2. PHP 5.3.3 or later
 
-PHP 5.3.3 and later.
+## Installation
 
-## Issue Reporting
-Please only file issues here that you believe represent actual bugs or feature
-requests for the AdButler PHP library.
-
-If you're having general trouble with your AdButler integration, please reach
-out to our amazing support team via email to api@adbutler.com.
-
-If you are reporting a bug, please include your PHP version and the version of
-the AdButler PHP library you're using, as well as any other details that may be
-helpful in reproducing the problem.
-
-## Composer
+### Composer
 
 You can install the bindings via [Composer](http://getcomposer.org/).
 Run the following command:
@@ -37,7 +34,7 @@ To use the bindings, use Composer's [autoload](https://getcomposer.org/doc/00-in
 require_once('vendor/autoload.php');
 ```
 
-## Manual Installation
+### Manual Installation
 
 If you do not wish to use Composer, you can download the
 [latest release](https://github.com/adbutler/adbutler-php/releases).
