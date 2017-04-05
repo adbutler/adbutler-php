@@ -219,7 +219,6 @@ class CURLClient
      */
     private static function constructCURLOptionsArray($method, $data) {
         $hasFile     = !is_null($data) && key_exists('file' , $data);
-        $hasGeoAreas = !is_null($data) && key_exists('areas', $data);
         $contentType = $hasFile ? 'multipart/form-data' : 'application/json';
         
         $curlOpts = array(
@@ -235,12 +234,9 @@ class CURLClient
                 'Authorization: Basic ' . self::$api,
                 'X-AdButler-Requestor: ' . php_uname(),
                 'X-AdButler-PHP-Client: true',
+                'Expect: ',
             ),
         );
-
-        if ($hasFile || $hasGeoAreas) {
-            $curlOpts[CURLOPT_HTTPHEADER][] = 'Expect:';
-        }
 
         // passing an array to CURLOPT_POSTFIELDS will encode the data as multipart/form-data,
         // while passing a URL-encoded string will encode the data as application/x-www-form-urlencoded.
