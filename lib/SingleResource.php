@@ -31,7 +31,7 @@ abstract class SingleResource extends ResourceBase
         // $bodyParams can be null if data is optional
         /** @var ListOnlyResource $class */
         $class = get_called_class();
-        $data = static::getDecodedResponse('POST', $class::getResourceURL(), null, $bodyParams);
+        $data = static::getDecodedResponse('POST', $class::getResourceURL(), null, $bodyParams, $queryParams);
         if (key_exists('object', $data) && $data['object'] === $class::$type) {
             return new $class( $data ); // success: always return a new advertiser object
         } else {
@@ -65,7 +65,7 @@ abstract class SingleResource extends ResourceBase
     protected static function retrieve($id, $queryParams=array()) {
         // can $params be header parameters?
         $class = get_called_class(); /** @var ListOnlyResource $class */
-        $data = self::getDecodedResponse('GET', $class::getResourceURL(), $id);
+        $data = self::getDecodedResponse('GET', $class::getResourceURL(), $id, null, $queryParams);
 
         // inspect response if it has the correct type
         $isCorrectObjectType = key_exists('object', $data) && $data['object'] === $class::$type;
@@ -143,7 +143,7 @@ abstract class SingleResource extends ResourceBase
         $class = get_called_class(); /** @var ListOnlyResource $class */
 
         // use POST if it's a creative
-        $response = self::getDecodedResponse( ($isCreative ? 'POST' : 'PUT'), $class::getResourceURL(), $id, $bodyParams);
+        $response = self::getDecodedResponse( ($isCreative ? 'POST' : 'PUT'), $class::getResourceURL(), $id, $bodyParams, $queryParams);
 
         // inspect response for success or failure
         if ($response['object'] === $class::$type) {
@@ -180,7 +180,7 @@ abstract class SingleResource extends ResourceBase
         /** @var ListOnlyResource $class */
         $class = get_called_class();
         
-        $data = self::getDecodedResponse('DELETE', $class::getResourceURL(), $this->data['id']);
+        $data = self::getDecodedResponse('DELETE', $class::getResourceURL(), $this->data['id'], null, $queryParams);
         
         // inspect response to see if success or error
         if( key_exists('deleted', $data) && $data['deleted'] ) {
