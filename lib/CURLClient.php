@@ -156,18 +156,18 @@ class CURLClient
      * @param $method
      * @param $url
      * @param null $id
-     * @param null $data - POST or PUT data
-     * @param array $params - Filter parameters e.g. zoneID when filtering placements by zone ID
+     * @param null $bodyParams - POST or PUT data
+     * @param array $queryParams - Filter parameters e.g. zoneID when filtering placements by zone ID
      * @param array $opts - Response modifiers e.g. limit, fields.
      *
      * @return mixed
      * @throws APIConnectionError
      * @throws UndefinedRequestParametersError
      */
-    public static function request($method, $url, $id = null, $data = null, $params = array(), $opts = array()) {
+    public static function request($method, $url, $id = null, $bodyParams = null, $queryParams = array(), $opts = array()) {
 
         // throwing error if no data given for POST or PUT request
-        if ( ($method === 'POST' || $method === 'PUT') && is_null($data) ) {
+        if ( ($method === 'POST' || $method === 'PUT') && is_null($bodyParams) ) {
             throw new UndefinedRequestParametersError(array(
                 'object'  => 'error',
                 'type'    => 'undefined_request_parameters_error',
@@ -176,8 +176,8 @@ class CURLClient
             ));
         }
         
-        $requestURL  = self::constructRequestURL($url, $id, $params, $opts);
-        $curlOptions = self::constructCURLOptionsArray($method, $data);
+        $requestURL  = self::constructRequestURL($url, $id, $queryParams, $opts);
+        $curlOptions = self::constructCURLOptionsArray($method, $bodyParams);
         $response    = static::_makeRequest($requestURL, $curlOptions);
 
         // CURL Error Handling
@@ -258,12 +258,13 @@ class CURLClient
     /**
      * @param  string $url
      * @param  int    $id
-     * @param  array  $params
+     * @param  array  $queryParams
      * @param  array  $opts
+     *
      * @return string
      */
-    public static function constructRequestURL($url, $id, $params, $opts) {
-        $qParams = $params + $opts;
+    public static function constructRequestURL($url, $id, $queryParams, $opts) {
+        $qParams = $queryParams + $opts;
         
         if (array_key_exists('fields', $qParams)) {
             $qParams['fields'] = join(',', array_map('rawurlencode', $qParams['fields']));

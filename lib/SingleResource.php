@@ -120,7 +120,7 @@ abstract class SingleResource extends ResourceBase
      * @throws \Exception
      */
     protected function save($queryParams = array()) {
-        $params = $this->unsavedValues;
+        $bodyParams = $this->unsavedValues;
 
         // if no values to save, just return
         if ( empty($this->unsavedValues) ) {
@@ -134,16 +134,16 @@ abstract class SingleResource extends ResourceBase
         $id = $this->data['id'];
 
         // Necessary Guard: always unset the following fields
-        unset($params['id']);
-        unset($params['object']);
-        unset($params['self']);
+        unset($bodyParams['id']);
+        unset($bodyParams['object']);
+        unset($bodyParams['self']);
 
         // TODO: $params can never be null when updating
 
         $class = get_called_class(); /** @var ListOnlyResource $class */
 
         // use POST if it's a creative
-        $response = self::getDecodedResponse( ($isCreative ? 'POST' : 'PUT'), $class::getResourceURL(), $id, $params);
+        $response = self::getDecodedResponse( ($isCreative ? 'POST' : 'PUT'), $class::getResourceURL(), $id, $bodyParams);
 
         // inspect response for success or failure
         if ($response['object'] === $class::$type) {

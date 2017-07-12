@@ -70,8 +70,8 @@ abstract class ResourceBase
      * @param       $method
      * @param       $url
      * @param null  $id
-     * @param null  $data   POST or PUT  data
-     * @param array $params like zoneID when filtering placement by zones
+     * @param null  $bodyParams   POST or PUT  data
+     * @param array $queryParams like zoneID when filtering placement by zones
      * @param array $opts   anything that modifies the output response like limit, fields etc.
      *
      * @return array|mixed
@@ -79,10 +79,10 @@ abstract class ResourceBase
      * @throws Error\APIConnectionError
      * @throws Error\UndefinedRequestParametersError
      */
-    protected static function getDecodedResponse( $method, $url, $id = null, $data = null, $params = array(), $opts = array() ) {
+    protected static function getDecodedResponse($method, $url, $id = null, $bodyParams = null, $queryParams = array(), $opts = array() ) {
         // make request to url and don't validate data on the client side
         $curlClient = self::$curlClient; /** @var CURLClient $curlClient */
-        $response = $curlClient::request($method, $url, $id, $data, $params, $opts);
+        $response = $curlClient::request($method, $url, $id, $bodyParams, $queryParams, $opts);
 
         // decode response as associative array
         $result = json_decode( $response, true );
