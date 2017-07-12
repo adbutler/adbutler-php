@@ -3,6 +3,21 @@
 namespace AdButler\Utils;
 
 /**
+ * @param array $arr 
+ * @param array $map A map mapping resource object type to the PHP class name
+ *
+ * @return object mixed
+ */
+function instantiateRecursively($arr, &$map) {
+    $arrFields = array_filter($arr, 'is_array');
+    if (!empty($arrFields))
+        foreach ($arrFields as $field => $value)
+            $arr[$field] = key_exists('object', $value) ? instantiateRecursively($value, $map) : $value;
+    $class = key_exists($arr['object'], $map) ? $map[$arr['object']] : null;
+    return empty($class) ? $arr : new $class($arr);
+}
+
+/**
  * Indents the string by given number of space characters.
  * Default number of space characters is 0 which amounts to un-indenting the string.
  * 

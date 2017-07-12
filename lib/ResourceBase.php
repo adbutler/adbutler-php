@@ -18,6 +18,44 @@ abstract class ResourceBase
     protected $data = array();
     protected $unsavedValues = array();
 
+    protected static $objectToResourceMap = array(
+        'advertiser'          => '\AdButler\Advertiser',
+        //'list'              => '\AdButler\Banner',
+        'banner_campaign'     => '\AdButler\BannerCampaign',
+        'banner_zone'         => '\AdButler\BannerZone',
+        //'list'              => '\AdButler\Campaign',
+        'campaign_assignment' => '\AdButler\CampaignAssignment',
+        'channel'             => '\AdButler\Channel',
+        //'list'              => '\AdButler\Creative',
+        'custom_html_banner'  => '\AdButler\CustomHTMLBanner',
+        'custom_html_popup'   => '\AdButler\CustomHTMLPopup',
+        'email_zone'          => '\AdButler\EmailZone',
+        'flash_banner'        => '\AdButler\FlashBanner',
+        'flash_creative'      => '\AdButler\FlashCreative',
+        'flash_popup'         => '\AdButler\FlashPopup',
+        'geo_target'          => '\AdButler\GeoTarget',
+        'image_banner'        => '\AdButler\ImageBanner',
+        'image_creative'      => '\AdButler\ImageCreative',
+        'image_popup'         => '\AdButler\ImagePopup',
+        'isp_target'          => '\AdButler\ISPTarget',
+        'manager'             => '\AdButler\Manager',
+        'media_group'         => '\AdButler\MediaGroup',
+        'placement'           => '\AdButler\Placement',
+        'platform_target'     => '\AdButler\PlatformTarget',
+        //'list'              => '\AdButler\Popup',
+        'publisher'           => '\AdButler\Publisher',
+        'rich_media_banner'   => '\AdButler\RichMediaBanner',
+        'rich_media_creative' => '\AdButler\RichMediaCreative',
+        'schedule'            => '\AdButler\Schedule',
+        'stats'               => '\AdButler\Stats',
+        'text_ad'             => '\AdButler\TextAd',
+        'text_campaign'       => '\AdButler\TextAdCampaign',
+        'text_zone'           => '\AdButler\TextZone',
+        'video_creative'      => '\AdButler\VideoCreative',
+        //'list'              => '\AdButler\Zone',
+        'zone_tag'            => '\AdButler\ZoneTag',
+    );
+
     /**
      * @param array $opts
      *

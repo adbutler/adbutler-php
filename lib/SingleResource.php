@@ -33,7 +33,7 @@ abstract class SingleResource extends ResourceBase
         $class = get_called_class();
         $data = static::getDecodedResponse('POST', $class::getResourceURL(), null, $bodyParams, $queryParams);
         if (key_exists('object', $data) && $data['object'] === $class::$type) {
-            return new $class( $data ); // success: always return a new advertiser object
+            return Utils\instantiateRecursively($data, self::$objectToResourceMap); // success: always return a new advertiser object
         } else {
             self::throwRequestError($data);
         }
@@ -73,12 +73,7 @@ abstract class SingleResource extends ResourceBase
             self::throwRequestError($data);
         }
         
-        // check if the object is already instantiated or not and respond accordingly
-        if ( empty(self::$objectInstance) ) {
-            return new $class( $data ); // static method call: instantiate an advertiser object with data
-        } else {
-            return self::$objectInstance->setData( $data ); // member method call: set data on the existing object and return it
-        }
+        return Utils\instantiateRecursively($data, self::$objectToResourceMap); // static method call: instantiate an advertiser object with data
     }
 
     /**
@@ -148,7 +143,8 @@ abstract class SingleResource extends ResourceBase
         // inspect response for success or failure
         if ($response['object'] === $class::$type) {
             $this->unsavedValues = array(); // resetting the unsaved values array
-            return $class::$objectInstance->setData( $response );
+            return Utils\instantiateRecursively($response, self::$objectToResourceMap);
+//            return $class::$objectInstance->setData( $response );
         } else { // failure
             self::throwRequestError($response);
         }
