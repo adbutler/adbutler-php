@@ -271,10 +271,4 @@ abstract class ResourceBase
     public function __toString() {
         return get_class($this) . ' JSON: ' . $this->toJSON();
     }
-
 }
-
-
-
-
-
