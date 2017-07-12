@@ -124,7 +124,7 @@ abstract class SingleResource extends ResourceBase
 
         // if no values to save, just return
         if ( empty($this->unsavedValues) ) {
-            return $this;
+            return self::retrieve($this->data['id']); // syncing object with server
         }
 
         // edge case for creatives
