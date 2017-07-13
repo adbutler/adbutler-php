@@ -11,7 +11,7 @@ namespace AdButler;
  */
 class TextAdCampaign extends SingleResource
 {
-    protected static $type = 'text_ad_campaign';
+    protected static $type = 'text_campaign';
     protected static $url  = 'campaigns/text';
 
     /*
