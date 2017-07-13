@@ -25,8 +25,10 @@ You can install the bindings via [Composer](http://getcomposer.org/).
 Run the following command:
 
 ```bash
-composer require adbutler/adbutler-php
+composer require adbutler/adbutler-php 1.0.4-beta
 ```
+
+You need to mention the version tag to install the beta release. For regular releases, you can omit the version and composer will install the latest stable release.
 
 To use the bindings, use Composer's [autoload](https://getcomposer.org/doc/00-intro.md#autoloading):
 
