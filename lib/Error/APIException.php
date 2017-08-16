@@ -39,7 +39,7 @@ class APIException extends \Exception
         
         $this->type       = $data['type'];
         $this->message    = $data['message'];
-        $this->parameters = array_key_exists('status'    , $data) ? $data['status']     : array();
+        $this->status     = array_key_exists('status'    , $data) ? $data['status']     : array();
         $this->parameters = array_key_exists('parameters', $data) ? $data['parameters'] : array();
     }
 
