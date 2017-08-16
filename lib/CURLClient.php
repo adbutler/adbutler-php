@@ -220,6 +220,8 @@ class CURLClient
     private static function constructCURLOptionsArray($method, $data) {
         $hasFile     = !is_null($data) && key_exists('file' , $data);
         $contentType = $hasFile ? 'multipart/form-data' : 'application/json';
+
+        $curlInfoArray = curl_version();
         
         $curlOpts = array(
             CURLOPT_HTTPGET        => $method == 'GET',
@@ -234,6 +236,9 @@ class CURLClient
                 'Authorization: Basic ' . self::$api,
                 'X-AdButler-Requestor: ' . php_uname(),
                 'X-AdButler-PHP-Client: true',
+                'X-AdButler-PHP-Client-Version: 1.0.5',
+                'X-AdButler-PHP-Version: ' . phpversion(),
+                'X-AdButler-PHP-CURL-Version: ' . $curlInfoArray['version'],
                 'Expect: ',
             ),
         );
