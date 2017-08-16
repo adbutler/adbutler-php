@@ -59,6 +59,7 @@ require_once(dirname(__FILE__) . '/lib/Resource/MediaGroup.php');
 require_once(dirname(__FILE__) . '/lib/Resource/Placement.php');
 require_once(dirname(__FILE__) . '/lib/Resource/PlatformTarget.php');
 require_once(dirname(__FILE__) . '/lib/Resource/Publisher.php');
+require_once(dirname(__FILE__) . '/lib/Resource/Report.php');
 require_once(dirname(__FILE__) . '/lib/Resource/RichMediaBanner.php');
 require_once(dirname(__FILE__) . '/lib/Resource/RichMediaCreative.php');
 require_once(dirname(__FILE__) . '/lib/Resource/Schedule.php');
