@@ -23,6 +23,7 @@ abstract class ResourceBase
         //'list'              => '\AdButler\Banner',
         'banner_campaign'     => '\AdButler\BannerCampaign',
         'banner_zone'         => '\AdButler\BannerZone',
+        'bidder'              => '\AdButler\Bidder',
         //'list'              => '\AdButler\Campaign',
         'campaign_assignment' => '\AdButler\CampaignAssignment',
         'channel'             => '\AdButler\Channel',

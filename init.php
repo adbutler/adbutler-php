@@ -39,6 +39,7 @@ require_once(dirname(__FILE__) . '/lib/Resource/Advertiser.php');
 require_once(dirname(__FILE__) . '/lib/Resource/Banner.php');
 require_once(dirname(__FILE__) . '/lib/Resource/BannerCampaign.php');
 require_once(dirname(__FILE__) . '/lib/Resource/BannerZone.php');
+require_once(dirname(__FILE__) . '/lib/Resource/Bidder.php');
 require_once(dirname(__FILE__) . '/lib/Resource/CampaignAssignment.php');
 require_once(dirname(__FILE__) . '/lib/Resource/Channel.php');
 require_once(dirname(__FILE__) . '/lib/Resource/Creative.php');

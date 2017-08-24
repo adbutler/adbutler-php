@@ -45,6 +45,7 @@ class Collection
         'email_zone'          => 'AdButler\EmailZone',
         'text_zone'           => 'AdButler\TextZone',
         'campaign_assignment' => 'AdButler\CampaignAssignment',
+        'bidder'              => 'AdButler\Bidder',
     );
 
     /**
