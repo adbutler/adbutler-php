@@ -9,10 +9,6 @@ You can sign up for an AdButler account at [https://adbutler.com](https://adbutl
 
 If you are looking for documentation, go here: [https://adbutler.com/docs/api?php](https://adbutler.com/docs/api?php)
 
-## Beta
-This project is currently in closed beta, but is considered fully functional.
-You may request an API key here: [https://getfoureyes.com/s/a3leK/](https://getfoureyes.com/s/a3leK/)
-
 ## Requirements
   1. [AdButler account](https://adbutler.com/)
   2. PHP 5.3.3 or later
