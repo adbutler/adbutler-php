@@ -6,6 +6,7 @@ namespace AdButler;
  * @property-read  int    id
  * @property-read  string object
  * @property-read  string self
+ * @property       string dimensions
  * @property       string name
  * @property       int    width
  * @property       int    height
