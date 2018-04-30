@@ -55,6 +55,17 @@ abstract class ResourceBase
         'video_creative'      => '\AdButler\VideoCreative',
         //'list'              => '\AdButler\Zone',
         'zone_tag'            => '\AdButler\ZoneTag',
+		'channel_zone_assignment' => '\AdButler\ChannelZoneAssignment',
+		'vast_campaign'       => '\AdButler\VASTCampaign',
+		'vast_zone'           => '\AdButler\VASTZone',
+		'vast_channel'        => '\AdButler\VASTChannel',
+		'vast_channel_zone_assignment' => '\AdButler\VASTChannelZoneAssignment',
+		'vast_banner'         => '\AdButler\VASTBanner',
+		'vast_companion'      => '\AdButler\VASTCompanion',
+		'vast_media'          => '\AdButler\VASTMedia',
+		'vast_schedule'       => '\AdButler\VASTSchedule',
+		'vast_placement'      => '\AdButler\VASTPlacement',
+		'vast_tracking'       => '\AdButler\VASTTracking',
     );
 
     /**
