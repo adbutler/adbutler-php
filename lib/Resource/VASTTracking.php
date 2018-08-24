@@ -3,23 +3,17 @@
 namespace AdButler;
 
 /**
- * @property-read  int    id
- * @property-read  string object
- * @property-read  string self
- * @property       string name
- * @property       int    width
- * @property       int    height
- * @property       int    publisher
- * @property       int    popup_frequency
- * @property       int    refresh_frequency
- * @property       int    refresh_limit
- * @property       string responsive
- * @property       bool   unique_delivery
+ * @property-read 	int     id
+ * @property-read 	string  object
+ * @property-read 	string  self
+ * @property 		int banner_id
+ * @property 		string type
+ * @property 		string link
  */
-class BannerZone extends SingleResource
+class VASTTracking extends SingleResource
 {
-    protected static $type = 'banner_zone';
-    protected static $url  = 'zones/banner';
+    protected static $type = 'vast_tracking';
+    protected static $url  = 'vast-tracking';
 
     /*
      * Overridden Methods
@@ -30,7 +24,7 @@ class BannerZone extends SingleResource
      * @param array $bodyParams
      * @param array $queryParams
      *
-     * @return BannerZone
+     * @return VASTTracking
      * @throws Error\APIConnectionError
      * @throws Error\APIError
      * @throws Error\InvalidAPIKeyError
@@ -57,7 +51,7 @@ class BannerZone extends SingleResource
      * @param int   $id
      * @param array $queryParams
      *
-     * @return BannerZone
+     * @return VASTTracking
      * @throws Error\APIConnectionError
      * @throws Error\APIError
      * @throws Error\InvalidAPIKeyError
@@ -83,7 +77,7 @@ class BannerZone extends SingleResource
     /**
      * @param array $bodyParams
      *
-     * @return BannerZone
+     * @return VASTTracking
      */
     public function update($bodyParams = array()) {
         return parent::update($bodyParams);
@@ -92,7 +86,7 @@ class BannerZone extends SingleResource
     /**
      * @param array $queryParams
      *
-     * @return BannerZone
+     * @return VASTTracking
      * @throws Error\APIConnectionError
      * @throws Error\APIError
      * @throws Error\InvalidAPIKeyError
@@ -171,19 +165,5 @@ class BannerZone extends SingleResource
      * Resource specific methods
      * =========================
      */
-
-    /**
-     * @param array $queryParams
-     *
-     * @return ZoneTag
-     * @throws \Exception
-     */
-    public function getTags( $queryParams ) {
-        if ( !is_null($this->id) ) {
-            return ZoneTag::retrieve($this->id, $queryParams);
-        } else {
-            throw new \Exception("Fail");
-            //TODO: no zone ID, throw error!
-        }
-    }
 }
+
