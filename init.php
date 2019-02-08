@@ -72,3 +72,18 @@ require_once(dirname(__FILE__) . '/lib/Resource/TextZone.php');
 require_once(dirname(__FILE__) . '/lib/Resource/VideoCreative.php');
 require_once(dirname(__FILE__) . '/lib/Resource/Zone.php');
 require_once(dirname(__FILE__) . '/lib/Resource/ZoneTag.php');
+require_once(dirname(__FILE__) . '/lib/Resource/VASTCampaign.php');
+require_once(dirname(__FILE__) . '/lib/Resource/VASTZone.php');
+require_once(dirname(__FILE__) . '/lib/Resource/VASTChannel.php');
+require_once(dirname(__FILE__) . '/lib/Resource/VASTChannelZoneAssignment.php');
+require_once(dirname(__FILE__) . '/lib/Resource/VASTBanner.php');
+require_once(dirname(__FILE__) . '/lib/Resource/VASTCompanion.php');
+require_once(dirname(__FILE__) . '/lib/Resource/VASTMedia.php');
+require_once(dirname(__FILE__) . '/lib/Resource/VASTSchedule.php');
+require_once(dirname(__FILE__) . '/lib/Resource/VASTPlacement.php');
+require_once(dirname(__FILE__) . '/lib/Resource/VASTTracking.php');
+
+
+
+
+
