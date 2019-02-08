@@ -11,7 +11,7 @@ If you are looking for documentation, go here: [https://adbutler.com/docs/api?ph
 
 ## Requirements
   1. [AdButler account](https://adbutler.com/)
-  2. PHP 5.3.3 or later
+  2. PHP 5.6 or later
 
 ## Installation
 
