@@ -63,6 +63,7 @@ require_once(dirname(__FILE__) . '/lib/Resource/Publisher.php');
 require_once(dirname(__FILE__) . '/lib/Resource/Report.php');
 require_once(dirname(__FILE__) . '/lib/Resource/RichMediaBanner.php');
 require_once(dirname(__FILE__) . '/lib/Resource/RichMediaCreative.php');
+require_once(dirname(__FILE__) . '/lib/Resource/S2SBanner.php');
 require_once(dirname(__FILE__) . '/lib/Resource/Schedule.php');
 require_once(dirname(__FILE__) . '/lib/Resource/Stats.php');
 require_once(dirname(__FILE__) . '/lib/Resource/TextAd.php');

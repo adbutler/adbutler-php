@@ -47,6 +47,7 @@ abstract class ResourceBase
         'publisher'           => '\AdButler\Publisher',
         'rich_media_banner'   => '\AdButler\RichMediaBanner',
         'rich_media_creative' => '\AdButler\RichMediaCreative',
+        's2s_banner'          => '\AdButler\S2SBanner',
         'schedule'            => '\AdButler\Schedule',
         'stats'               => '\AdButler\Stats',
         'text_ad'             => '\AdButler\TextAd',
