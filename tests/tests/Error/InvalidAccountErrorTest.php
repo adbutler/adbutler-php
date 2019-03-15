@@ -15,7 +15,7 @@ class InvalidAccountErrorTest extends AdButlerTestCase
     {
         $this->setExpectedException(TestUtils::getFQCN('InvalidAccountError'));
 
-        $this->setCannedResult( $this->cannedResponse );
+        $this->setCannedResult($this->cannedResponse);
 
         Advertiser::create(array());
     }

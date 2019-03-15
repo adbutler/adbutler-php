@@ -3,16 +3,16 @@
 namespace AdButler;
 
 /**
- * @property-read int    id
+ * @property-read int id
  * @property-read string object
  * @property-read string self
  * @property      string name
- * @property      int    publisher
+ * @property      int publisher
  */
 class TextZone extends SingleResource
 {
     protected static $type = 'text_zone';
-    protected static $url  = 'zones/text';
+    protected static $url = 'zones/text';
 
     /*
      * Overridden Methods
@@ -42,12 +42,13 @@ class TextZone extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function create($bodyParams = array(), $queryParams = array()) {
+    public static function create($bodyParams = array(), $queryParams = array())
+    {
         return parent::create($bodyParams, $queryParams);
     }
 
     /**
-     * @param int   $id
+     * @param int $id
      * @param array $queryParams
      *
      * @return TextZone
@@ -69,7 +70,8 @@ class TextZone extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieve($id, $queryParams = array()) {
+    public static function retrieve($id, $queryParams = array())
+    {
         return parent::retrieve($id, $queryParams);
     }
 
@@ -78,7 +80,8 @@ class TextZone extends SingleResource
      *
      * @return TextZone
      */
-    public function update($bodyParams = array()) {
+    public function update($bodyParams = array())
+    {
         return parent::update($bodyParams);
     }
 
@@ -104,7 +107,8 @@ class TextZone extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function save($queryParams = array()) {
+    public function save($queryParams = array())
+    {
         return parent::save($queryParams);
     }
 
@@ -130,7 +134,8 @@ class TextZone extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function delete($queryParams = array()) {
+    public function delete($queryParams = array())
+    {
         return parent::delete($queryParams);
     }
 
@@ -156,7 +161,8 @@ class TextZone extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieveAll($queryParams = array()) {
+    public static function retrieveAll($queryParams = array())
+    {
         return parent::retrieveAll($queryParams);
     }
 
@@ -171,8 +177,9 @@ class TextZone extends SingleResource
      * @return ZoneTag
      * @throws \Exception
      */
-    public function getTags( $queryParams ) {
-        if ( !is_null($this->id) ) {
+    public function getTags($queryParams)
+    {
+        if (!is_null($this->id)) {
             return ZoneTag::retrieve($this->id, $queryParams);
         } else {
             throw new \Exception("Fail");

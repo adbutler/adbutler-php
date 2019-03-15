@@ -29,8 +29,13 @@
   },
   "autoload": {
     "psr-4": {
-      "AdButler\\" : ["lib/", "lib/Resource"]
+      "AdButler\\": [
+        "lib/",
+        "lib/Resource"
+      ]
     },
-    "files": ["lib/Utils.php"]
+    "files": [
+      "lib/Utils.php"
+    ]
   }
 }

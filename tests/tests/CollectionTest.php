@@ -4,9 +4,10 @@ namespace AdButler;
 
 use AdButler\Error\InvalidPropertyException;
 
-class CollectionTest extends \PHPUnit_Framework_TestCase  
+class CollectionTest extends \PHPUnit_Framework_TestCase
 {
-    private function getCollectionData() {
+    private function getCollectionData()
+    {
         return array(
             'object'   => 'list',
             'has_more' => false,
@@ -27,8 +28,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
             ),
         );
     }
-    
-    private function getUpdateData() {
+
+    private function getUpdateData()
+    {
         return array(
             array(
                 'object'         => 'banner_campaign',
@@ -42,15 +44,17 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
             )
         );
     }
-    
-    public function testInstantiationReturningObject() {
-        $collection = Collection::instantiate( $this->getCollectionData() );
+
+    public function testInstantiationReturningObject()
+    {
+        $collection = Collection::instantiate($this->getCollectionData());
         $this->assertNotEmpty($collection->getData());
         $this->assertInstanceOf('AdButler\Collection', $collection);
     }
 
-    public function testInstantiationReturningArray() {
-        $collection = Collection::instantiate( $this->getCollectionData(), true );
+    public function testInstantiationReturningArray()
+    {
+        $collection = Collection::instantiate($this->getCollectionData(), true);
         $this->assertNotEmpty($collection);
         $this->assertInternalType('array', $collection);
     }
@@ -65,45 +69,50 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 //        }
 //        
 //    }
-    
-    public function testGet() {
-        $collection = Collection::instantiate( $this->getCollectionData() );
-        
-        $this->assertInternalType('string' , $collection->object);
+
+    public function testGet()
+    {
+        $collection = Collection::instantiate($this->getCollectionData());
+
+        $this->assertInternalType('string', $collection->object);
         $this->assertInternalType('boolean', $collection->has_more);
-        $this->assertInternalType('int'    , $collection->limit);
-        $this->assertInternalType('int'    , $collection->offset);
-        $this->assertInternalType('string' , $collection->url);
-        $this->assertInternalType('array'  , $collection->getData());
-        
-        $this->assertSame('list'           , $collection->object);
-        $this->assertSame(false            , $collection->has_more);
-        $this->assertSame(0                , $collection->limit);
-        $this->assertSame(0                , $collection->offset);
+        $this->assertInternalType('int', $collection->limit);
+        $this->assertInternalType('int', $collection->offset);
+        $this->assertInternalType('string', $collection->url);
+        $this->assertInternalType('array', $collection->getData());
+
+        $this->assertSame('list', $collection->object);
+        $this->assertSame(false, $collection->has_more);
+        $this->assertSame(0, $collection->limit);
+        $this->assertSame(0, $collection->offset);
         $this->assertSame('/v1/advertisers', $collection->url);
-        
+
         $this->assertNotEmpty($collection->getData());
     }
-    
-    public function testGetData() {
+
+    public function testGetData()
+    {
         $colData = $this->getCollectionData();
-        $collection = Collection::instantiate( $colData );
+        $collection = Collection::instantiate($colData);
         $data = $collection->getData();
         $this->assertInternalType('array', $data);
     }
-    
-    public function testSetData() {
+
+    public function testSetData()
+    {
         $colData = $this->getCollectionData();
-        $collection = Collection::instantiate( $colData );
+        $collection = Collection::instantiate($colData);
         $data = $collection->getData();
         $this->assertInternalType('array', $data);
     }
-    
-    public function testStringification() {
-        
+
+    public function testStringification()
+    {
+
     }
-    
-    public function testJSONification() {
-        
+
+    public function testJSONification()
+    {
+
     }
 }

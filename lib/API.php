@@ -38,7 +38,7 @@ class API
             $curlConfig = [
                 'api_key'  => isset($config['api_key']) ? $config['api_key'] : null,
                 'base_url' => isset($config['base_url']) ? $config['base_url'] : self::$baseURL,
-                'version' => isset($config['version']) ? $config['version'] : self::$version,
+                'version'  => isset($config['version']) ? $config['version'] : self::$version,
             ];
             CURLClient::init($curlConfig);
         }
@@ -75,12 +75,12 @@ class API
     {
         return self::$config['indentation'];
     }
-    
+
     public static function getBaseURL()
     {
         return self::$baseURL;
     }
-    
+
     public static function getVersion()
     {
         return self::$version;

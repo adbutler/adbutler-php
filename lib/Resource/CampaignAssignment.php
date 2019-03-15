@@ -3,19 +3,18 @@
 namespace AdButler;
 
 /**
- * @property-read  int        id
- * @property-read  string     object
- * @property-read  string     self
- * @property       bool       active
- * @property       int        campaign
- * @property       int        weight
- * @property       array      advertisement
+ * @property-read  int id
+ * @property-read  string object
+ * @property-read  string self
+ * @property       bool active
+ * @property       int campaign
+ * @property       int weight
+ * @property       array advertisement
  */
-
 class CampaignAssignment extends SingleResource
 {
     protected static $type = 'campaign_assignment';
-    protected static $url  = 'campaign-assignments';
+    protected static $url = 'campaign-assignments';
 
     /*
      * Overridden Methods
@@ -45,12 +44,13 @@ class CampaignAssignment extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function create($bodyParams = array(), $queryParams = array()) {
+    public static function create($bodyParams = array(), $queryParams = array())
+    {
         return parent::create($bodyParams, $queryParams);
     }
 
     /**
-     * @param int   $id
+     * @param int $id
      * @param array $queryParams
      *
      * @return CampaignAssignment
@@ -72,7 +72,8 @@ class CampaignAssignment extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieve($id, $queryParams = array()) {
+    public static function retrieve($id, $queryParams = array())
+    {
         return parent::retrieve($id, $queryParams);
     }
 
@@ -81,7 +82,8 @@ class CampaignAssignment extends SingleResource
      *
      * @return CampaignAssignment
      */
-    public function update($bodyParams = array()) {
+    public function update($bodyParams = array())
+    {
         return parent::update($bodyParams);
     }
 
@@ -107,7 +109,8 @@ class CampaignAssignment extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function save($queryParams = array()) {
+    public function save($queryParams = array())
+    {
         return parent::save($queryParams);
     }
 
@@ -133,7 +136,8 @@ class CampaignAssignment extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function delete($queryParams = array()) {
+    public function delete($queryParams = array())
+    {
         return parent::delete($queryParams);
     }
 
@@ -159,7 +163,8 @@ class CampaignAssignment extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieveAll($queryParams = array()) {
+    public static function retrieveAll($queryParams = array())
+    {
         return parent::retrieveAll($queryParams);
     }
 

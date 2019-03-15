@@ -3,17 +3,17 @@
 namespace AdButler;
 
 /**
- * @property-read  string   object
- * @property-read  boolean  has_more
- * @property-read  integer  limit
- * @property-read  integer  offset
- * @property-read  string   url
- * @property-read  array    data
+ * @property-read  string object
+ * @property-read  boolean has_more
+ * @property-read  integer limit
+ * @property-read  integer offset
+ * @property-read  string url
+ * @property-read  array data
  */
 class Zone extends ListOnlyResource
 {
     protected static $type = 'list';
-    protected static $url  = 'zones';
+    protected static $url = 'zones';
 
     /*
      * Overridden Methods
@@ -42,7 +42,8 @@ class Zone extends ListOnlyResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieveAll($queryParams = array()) {
+    public static function retrieveAll($queryParams = array())
+    {
         return parent::retrieveAll($queryParams);
     }
 

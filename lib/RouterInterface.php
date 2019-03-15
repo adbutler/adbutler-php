@@ -6,7 +6,7 @@ interface RouterInterface
 {
     /**
      * Initialize the router based on a provided configuration.
-     * 
+     *
      * @param array $config
      * @return mixed
      */
@@ -14,7 +14,7 @@ interface RouterInterface
 
     /**
      * Perform a request for data based on the parameters provided.
-     * 
+     *
      * @param $method
      * @param $uri
      * @param $bodyParams
@@ -25,7 +25,7 @@ interface RouterInterface
 
     /**
      * Retrieve the API version being used.
-     * 
+     *
      * @return mixed
      */
     public static function getVersion();

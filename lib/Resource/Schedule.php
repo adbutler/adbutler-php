@@ -3,16 +3,16 @@
 namespace AdButler;
 
 /**
- * @property-read int    id
+ * @property-read int id
  * @property-read string object
  * @property-read string self
  * @property-read string created_date
- * @property-read int    views
- * @property-read int    clicks
- * @property-read int    quota_remaining
+ * @property-read int views
+ * @property-read int clicks
+ * @property-read int quota_remaining
  * @property      string delivery_method
  * @property      string quota_type
- * @property      int    quota_lifetime
+ * @property      int quota_lifetime
  * @property      string start_date
  * @property      string end_date
  * @property      string under_delivery_behaviour
@@ -20,7 +20,7 @@ namespace AdButler;
 class Schedule extends SingleResource
 {
     protected static $type = 'schedule';
-    protected static $url  = 'schedules';
+    protected static $url = 'schedules';
 
     /*
      * Overridden Methods
@@ -50,12 +50,13 @@ class Schedule extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function create($bodyParams = array(), $queryParams = array()) {
+    public static function create($bodyParams = array(), $queryParams = array())
+    {
         return parent::create($bodyParams, $queryParams);
     }
 
     /**
-     * @param int   $id
+     * @param int $id
      * @param array $queryParams
      *
      * @return Schedule
@@ -77,7 +78,8 @@ class Schedule extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieve($id, $queryParams = array()) {
+    public static function retrieve($id, $queryParams = array())
+    {
         return parent::retrieve($id, $queryParams);
     }
 
@@ -86,7 +88,8 @@ class Schedule extends SingleResource
      *
      * @return Schedule
      */
-    public function update($bodyParams = array()) {
+    public function update($bodyParams = array())
+    {
         return parent::update($bodyParams);
     }
 
@@ -112,7 +115,8 @@ class Schedule extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function save($queryParams = array()) {
+    public function save($queryParams = array())
+    {
         return parent::save($queryParams);
     }
 
@@ -138,7 +142,8 @@ class Schedule extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function delete($queryParams = array()) {
+    public function delete($queryParams = array())
+    {
         return parent::delete($queryParams);
     }
 
@@ -164,7 +169,8 @@ class Schedule extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieveAll($queryParams = array()) {
+    public static function retrieveAll($queryParams = array())
+    {
         return parent::retrieveAll($queryParams);
     }
 

@@ -12,11 +12,12 @@ class TestUtils
      * Source: https://jtreminio.com/2013/03/unit-testing-tutorial-part-3-testing-protected-private-methods-coverage-reports-and-crap/
      * Call protected/private method of a class.
      *
-     * @param object|string $object     Instantiated object that we will run method on.
-     * @param string        $methodName Method name to call
-     * @param array         $parameters Array of parameters to pass into method.
+     * @param object|string $object Instantiated object that we will run method on.
+     * @param string $methodName Method name to call
+     * @param array $parameters Array of parameters to pass into method.
      *
      * @return mixed Method return.
+     * @throws \ReflectionException
      */
     public function invokeMethod($object, $methodName, array $parameters = array())
     {
@@ -26,8 +27,9 @@ class TestUtils
 
         return $method->invokeArgs(is_object($object) ? $object : null, $parameters);
     }
-    
-    public function getTestApiKey() {
+
+    public function getTestApiKey()
+    {
         return 'aae7483d22bcab47bd9449a015637ee4';
     }
 
@@ -38,7 +40,8 @@ class TestUtils
      *
      * @return string Fully Qualified Class Name of the Error class
      */
-    public static function getFQCN($errorClassName) {
+    public static function getFQCN($errorClassName)
+    {
         return "AdButler\\Error\\$errorClassName";
     }
 }

@@ -10,16 +10,17 @@ class InvalidRequestErrorTest extends AdButlerTestCase
         'message' => 'Resource not found.',
         'status'  => 404
     );
-    
-    public function testThrowingOfError() {
+
+    public function testThrowingOfError()
+    {
         $this->setExpectedException(TestUtils::getFQCN('InvalidRequestError'));
-        
+
         $this->setCannedResult($this->cannedResponse);
-        
+
         // TODO: set this data on the advertiser object;
 
-        API::init( array('api_key' => 'invalid') );
+        API::init(array('api_key' => 'invalid'));
         Advertiser::create(array());
     }
-    
+
 }

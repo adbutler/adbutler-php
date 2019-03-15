@@ -3,26 +3,26 @@
 namespace AdButler;
 
 /**
- * @property-read  int         id
- * @property-read  string      object
- * @property-read  string      self
- * @property-read  string      created_date
+ * @property-read  int id
+ * @property-read  string object
+ * @property-read  string self
+ * @property-read  string created_date
  * @property-read  string|null last_modified
- * @property       string      name
- * @property       int         width
- * @property       int         height
- * @property       string      location
- * @property       string      tracking_pixel
- * @property       string      html_content_below
- * @property       int         creative
- * @property       string      html_path
- * @property       string      expand_horizontal_direction
- * @property       string      expand_vertical_direction
+ * @property       string name
+ * @property       int width
+ * @property       int height
+ * @property       string location
+ * @property       string tracking_pixel
+ * @property       string html_content_below
+ * @property       int creative
+ * @property       string html_path
+ * @property       string expand_horizontal_direction
+ * @property       string expand_vertical_direction
  */
 class RichMediaBanner extends SingleResource
 {
     protected static $type = 'rich_media_banner';
-    protected static $url  = 'banners/rich-media';
+    protected static $url = 'banners/rich-media';
 
     /*
      * Overridden Methods
@@ -52,12 +52,13 @@ class RichMediaBanner extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function create($bodyParams = array(), $queryParams = array()) {
+    public static function create($bodyParams = array(), $queryParams = array())
+    {
         return parent::create($bodyParams, $queryParams);
     }
 
     /**
-     * @param int   $id
+     * @param int $id
      * @param array $queryParams
      *
      * @return RichMediaBanner
@@ -79,7 +80,8 @@ class RichMediaBanner extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieve($id, $queryParams = array()) {
+    public static function retrieve($id, $queryParams = array())
+    {
         return parent::retrieve($id, $queryParams);
     }
 
@@ -88,7 +90,8 @@ class RichMediaBanner extends SingleResource
      *
      * @return RichMediaBanner
      */
-    public function update($bodyParams = array()) {
+    public function update($bodyParams = array())
+    {
         return parent::update($bodyParams);
     }
 
@@ -114,7 +117,8 @@ class RichMediaBanner extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function save($queryParams = array()) {
+    public function save($queryParams = array())
+    {
         return parent::save($queryParams);
     }
 
@@ -140,7 +144,8 @@ class RichMediaBanner extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function delete($queryParams = array()) {
+    public function delete($queryParams = array())
+    {
         return parent::delete($queryParams);
     }
 
@@ -166,7 +171,8 @@ class RichMediaBanner extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieveAll($queryParams = array()) {
+    public static function retrieveAll($queryParams = array())
+    {
         return parent::retrieveAll($queryParams);
     }
 

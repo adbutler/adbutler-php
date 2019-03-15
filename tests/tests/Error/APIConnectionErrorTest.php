@@ -9,7 +9,7 @@ class APIConnectionErrorTest extends AdButlerTestCase
         // Error\APIConnectionError::class throws error in PHP 5.3 and 5.4
         $this->setExpectedException(TestUtils::getFQCN('APIConnectionError'));
 
-        $this->setCURLError( 4, 'bla bla bla' );
+        $this->setCURLError(4, 'bla bla bla');
 
         Advertiser::create(array());
     }

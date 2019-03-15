@@ -3,28 +3,28 @@
 namespace AdButler;
 
 /**
- * @property-read  int         id
- * @property-read  string      object
- * @property-read  string      self
- * @property       string      name
- * @property       string      email
- * @property-write string      password
+ * @property-read  int id
+ * @property-read  string object
+ * @property-read  string self
+ * @property       string name
+ * @property       string email
+ * @property-write string password
  * @property       string|null notes
  * @property       string|null position
- * @property-read  string      created_date
+ * @property-read  string created_date
  * @property-read  string|null last_accessed
- * @property       bool        can_manage_links
- * @property       bool        can_manage_media
- * @property       bool        can_manage_targets
- * @property       bool        can_manage_users
- * @property       bool        can_view_stats
- * @property       bool        can_view_assigned_stats
- * @property       array       can_manage_publishers
+ * @property       bool can_manage_links
+ * @property       bool can_manage_media
+ * @property       bool can_manage_targets
+ * @property       bool can_manage_users
+ * @property       bool can_view_stats
+ * @property       bool can_view_assigned_stats
+ * @property       array can_manage_publishers
  */
 class Manager extends SingleResource
 {
     protected static $type = 'manager';
-    protected static $url  = 'managers';
+    protected static $url = 'managers';
 
     /*
      * Overridden Methods
@@ -54,12 +54,13 @@ class Manager extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function create($bodyParams = array(), $queryParams = array()) {
+    public static function create($bodyParams = array(), $queryParams = array())
+    {
         return parent::create($bodyParams, $queryParams);
     }
 
     /**
-     * @param int   $id
+     * @param int $id
      * @param array $queryParams
      *
      * @return Manager
@@ -81,7 +82,8 @@ class Manager extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieve($id, $queryParams = array()) {
+    public static function retrieve($id, $queryParams = array())
+    {
         return parent::retrieve($id, $queryParams);
     }
 
@@ -90,7 +92,8 @@ class Manager extends SingleResource
      *
      * @return Manager
      */
-    public function update($bodyParams = array()) {
+    public function update($bodyParams = array())
+    {
         return parent::update($bodyParams);
     }
 
@@ -116,7 +119,8 @@ class Manager extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function save($queryParams = array()) {
+    public function save($queryParams = array())
+    {
         return parent::save($queryParams);
     }
 
@@ -142,7 +146,8 @@ class Manager extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function delete($queryParams = array()) {
+    public function delete($queryParams = array())
+    {
         return parent::delete($queryParams);
     }
 
@@ -168,7 +173,8 @@ class Manager extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieveAll($queryParams = array()) {
+    public static function retrieveAll($queryParams = array())
+    {
         return parent::retrieveAll($queryParams);
     }
 

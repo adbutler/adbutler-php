@@ -17,7 +17,8 @@ class CURLClient implements RouterInterface
     private $timeout = 80;
     private $connectTimeout = 30;
 
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (empty(self::$instance)) {
             $class = get_called_class(); // let us instantiate curl client mock
             self::$instance = new $class;
@@ -31,12 +32,13 @@ class CURLClient implements RouterInterface
      * @return mixed|void
      * @throws UndefinedAPIKeyError
      */
-    public static function init( $config = array() ) {
+    public static function init($config = array())
+    {
         self::$instance = self::getInstance();
         self::$baseURL = $config['base_url'];
         self::$version = $config['version'];
-        
-        if ( key_exists('api_key', $config) ) {
+
+        if (key_exists('api_key', $config)) {
             self::$api = $config['api_key'];
         } else {
             throw new UndefinedAPIKeyError(array(
@@ -55,8 +57,9 @@ class CURLClient implements RouterInterface
     {
         return self::$version;
     }
-    
-    public static function defineUndefinedCURLErrorConstants() {
+
+    public static function defineUndefinedCURLErrorConstants()
+    {
 
         $allCURLErrorConstants = array(
             'CURLE_OK'                       => 0,
@@ -143,27 +146,33 @@ class CURLClient implements RouterInterface
             'CURLE_SSL_PINNEDPUBKEYNOTMATCH' => 90,
             'CURLE_SSL_INVALIDCERTSTATUS'    => 91,
             'CURLE_HTTP2_STREAM'             => 92,
-        );  
-        
-        foreach($allCURLErrorConstants as $name => $value) {
-            if ( !defined($name) ) {
+        );
+
+        foreach ($allCURLErrorConstants as $name => $value) {
+            if (!defined($name)) {
                 define($name, $value);
             }
         }
     }
 
-    public function getTimeout() {
+    public function getTimeout()
+    {
         return $this->timeout;
     }
-    public function getConnectTimeout() {
+
+    public function getConnectTimeout()
+    {
         return $this->connectTimeout;
     }
 
-    public function setTimeout($seconds) {
+    public function setTimeout($seconds)
+    {
         $this->timeout = intval(max($seconds, 0));
         return $this;
     }
-    public function setConnectTimeout($seconds) {
+
+    public function setConnectTimeout($seconds)
+    {
         $this->connectTimeout = intval(max($seconds, 0));
         return $this;
     }
@@ -179,10 +188,11 @@ class CURLClient implements RouterInterface
      * @throws APIConnectionError
      * @throws UndefinedRequestParametersError
      */
-    public static function request($method, $uri, $bodyParams = null, $queryParams = array()) {
+    public static function request($method, $uri, $bodyParams = null, $queryParams = array())
+    {
 
         // throwing error if no data given for POST or PUT request
-        if ( ($method === 'POST' || $method === 'PUT') && is_null($bodyParams) ) {
+        if (($method === 'POST' || $method === 'PUT') && is_null($bodyParams)) {
             throw new UndefinedRequestParametersError(array(
                 'object'  => 'error',
                 'type'    => 'undefined_request_parameters_error',
@@ -191,9 +201,9 @@ class CURLClient implements RouterInterface
             ));
         }
 
-        $requestURL  = self::constructRequestURL($uri, $queryParams);
+        $requestURL = self::constructRequestURL($uri, $queryParams);
         $curlOptions = self::constructCURLOptionsArray($method, $bodyParams);
-        $response    = static::_makeRequest($requestURL, $curlOptions);
+        $response = static::_makeRequest($requestURL, $curlOptions);
 
         // CURL Error Handling
         if ($response['error_number'] !== CURLE_OK) {
@@ -207,14 +217,15 @@ class CURLClient implements RouterInterface
 
         return $response['response'];
     }
-    
+
     /**
      * @param $url
      * @param $curlOptions
      *
      * @return array
      */
-    private static function _makeRequest( $url, $curlOptions ) {
+    private static function _makeRequest($url, $curlOptions)
+    {
         $ch = curl_init($url);
         curl_setopt_array($ch, $curlOptions);
         $response = curl_exec($ch);
@@ -229,15 +240,16 @@ class CURLClient implements RouterInterface
 
     /**
      * @param  string $method
-     * @param  array  $data
+     * @param  array $data
      * @return array
      */
-    private static function constructCURLOptionsArray($method, $data) {
-        $hasFile     = !is_null($data) && key_exists('file' , $data);
+    private static function constructCURLOptionsArray($method, $data)
+    {
+        $hasFile = !is_null($data) && key_exists('file', $data);
         $contentType = $hasFile ? 'multipart/form-data' : 'application/json';
 
         $curlInfoArray = curl_version();
-        
+
         $curlOpts = array(
             CURLOPT_HTTPGET        => $method == 'GET',
             CURLOPT_POST           => $method == 'POST',
@@ -271,7 +283,7 @@ class CURLClient implements RouterInterface
         if ($method === 'DELETE') {
             $curlOpts[CURLOPT_CUSTOMREQUEST] = 'DELETE';
         }
-        
+
         return $curlOpts;
     }
 
@@ -307,18 +319,18 @@ class CURLClient implements RouterInterface
             case CURLE_COULDNT_RESOLVE_HOST: // 6
             case CURLE_OPERATION_TIMEDOUT :  // 28
                 $msg = "Could not connect to AdButler ($url).  Please check your "
-                     . "internet connection and try again.  If this problem persists, "
-                     . "you should check AdButler's service status at "
-                     . "https://twitter.com/adbutlerstatus, or " // TODO: use the actual adbutler status page
-                     . "let us know at api@adbutler.com.";   // TODO: use the actual support email
+                    . "internet connection and try again.  If this problem persists, "
+                    . "you should check AdButler's service status at "
+                    . "https://twitter.com/adbutlerstatus, or " // TODO: use the actual adbutler status page
+                    . "let us know at api@adbutler.com.";   // TODO: use the actual support email
                 break;
 
             case CURLE_SSL_CACERT: // 60
             case CURLE_SSL_PEER_CERTIFICATE:
                 $msg = "Could not verify AdButler's SSL certificate.  Please make sure "
-                     . "that your network is not intercepting certificates.  "
-                     . "(Try going to $url in your browser.)  "
-                     . "If this problem persists, let us know at api@adbutler.com."; // TODO: use the actual support email
+                    . "that your network is not intercepting certificates.  "
+                    . "(Try going to $url in your browser.)  "
+                    . "If this problem persists, let us know at api@adbutler.com."; // TODO: use the actual support email
                 break;
 
             case CURLE_URL_MALFORMAT : // 3
@@ -327,19 +339,19 @@ class CURLClient implements RouterInterface
 
             case CURLE_UNSUPPORTED_PROTOCOL : // 1
                 $msg = "libcurl does not support the protocol you used in the URL \"$url\". "
-                     . "The support might be a compile-time option that you didn't use,"
-                     . "it can be a misspelled protocol string or just a protocol libcurl has no code for.";
+                    . "The support might be a compile-time option that you didn't use,"
+                    . "it can be a misspelled protocol string or just a protocol libcurl has no code for.";
                 break;
 
             case CURLE_FAILED_INIT : // 2
                 $msg = "Very early initialization code failed. "
-                     . "This is likely to be an internal error or problem, "
-                     . "or a resource problem where something fundamental couldn't get done at init time.";
+                    . "This is likely to be an internal error or problem, "
+                    . "or a resource problem where something fundamental couldn't get done at init time.";
                 break;
 
             case CURLE_NOT_BUILT_IN : // 4
                 $msg = "A requested feature, protocol or option was not found built-in in this libcurl due to a build-time decision. "
-                     . "This means that a feature or option was not enabled or explicitly disabled when libcurl was built and in order to get it to function you have to get a rebuilt libcurl.";
+                    . "This means that a feature or option was not enabled or explicitly disabled when libcurl was built and in order to get it to function you have to get a rebuilt libcurl.";
                 break;
 
             case CURLE_COULDNT_RESOLVE_PROXY : // 5
@@ -600,7 +612,7 @@ class CURLClient implements RouterInterface
 
             case CURLE_AGAIN : // 81
                 $msg = "Socket is not ready for send/recv wait till it's ready and try again. "
-                     . "This return code is only returned from curl_easy_recv and curl_easy_send (Added in 7.18.2)";
+                    . "This return code is only returned from curl_easy_recv and curl_easy_send (Added in 7.18.2)";
                 break;
 
             case CURLE_SSL_CRL_BADFILE : // 82
@@ -613,7 +625,7 @@ class CURLClient implements RouterInterface
 
             case CURLE_FTP_PRET_FAILED : // 84
                 $msg = "The FTP server does not understand the PRET command at all or does not support the given argument. "
-                     . "Be careful when using CURLOPT_CUSTOMREQUEST, a custom LIST command will be sent with PRET CMD before PASV as well. (Added in 7.20.0)";
+                    . "Be careful when using CURLOPT_CUSTOMREQUEST, a custom LIST command will be sent with PRET CMD before PASV as well. (Added in 7.20.0)";
                 break;
 
             case CURLE_RTSP_CSEQ_ERROR : // 85
@@ -650,7 +662,7 @@ class CURLClient implements RouterInterface
 
             default:
                 $msg = "Unexpected error communicating with AdButler. "
-                     . "If this problem persists, let us know at api@adbutler.com."; // TODO: use the actual support email
+                    . "If this problem persists, let us know at api@adbutler.com."; // TODO: use the actual support email
         }
 
         $msg .= " (Network error # $errNum)";
