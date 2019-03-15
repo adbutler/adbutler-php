@@ -66,4 +66,4 @@ echo $advertiser;
 Please see https://adbutler.com/docs/api for up-to-date documentation.
 
 ## License
-© 2016–2017 SparkLIT. Released under the MIT license.
+© 2016–2019 SparkLIT. Released under the MIT license.
