@@ -19,7 +19,7 @@
     "docs": "http://adbutler.com/docs/api/?php"
   },
   "require": {
-    "php": ">=5.3.3",
+    "php": ">=5.6",
     "ext-curl": "*",
     "ext-json": "*",
     "ext-mbstring": "*"
@@ -29,8 +29,13 @@
   },
   "autoload": {
     "psr-4": {
-      "AdButler\\" : ["lib/", "lib/Resource"]
+      "AdButler\\": [
+        "lib/",
+        "lib/Resource"
+      ]
     },
-    "files": ["lib/Utils.php"]
+    "files": [
+      "lib/Utils.php"
+    ]
   }
 }

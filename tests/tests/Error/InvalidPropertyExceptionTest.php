@@ -12,10 +12,10 @@ class InvalidPropertyExceptionTest extends AdButlerTestCase
     {
         $this->setExpectedException(TestUtils::getFQCN('InvalidPropertyException'));
 
-        $this->setCannedResult( $this->cannedResponse );
+        $this->setCannedResult($this->cannedResponse);
 
         $resource = Advertiser::retrieve(1);
-        
+
         $resource->invalid_property;
     }
 }

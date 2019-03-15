@@ -15,7 +15,7 @@ class UndefinedResponseErrorTest extends AdButlerTestCase
     {
         $this->setExpectedException(TestUtils::getFQCN('UndefinedResponseError'));
 
-        $this->setCannedResult( $this->cannedResponse );
+        $this->setCannedResult($this->cannedResponse);
 
         Advertiser::retrieve(1);
     }

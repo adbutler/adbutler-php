@@ -15,7 +15,7 @@ class InvalidResourceErrorTest extends AdButlerTestCase
     {
         $this->setExpectedException(TestUtils::getFQCN('InvalidResourceError'));
 
-        $this->setCannedResult( $this->cannedResponse );
+        $this->setCannedResult($this->cannedResponse);
 
         Advertiser::create(array());
     }

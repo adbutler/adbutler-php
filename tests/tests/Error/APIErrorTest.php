@@ -15,7 +15,7 @@ class APIErrorTest extends AdButlerTestCase
     {
         $this->setExpectedException(TestUtils::getFQCN('APIError'));
 
-        $this->setCannedResult( $this->cannedResponse );
+        $this->setCannedResult($this->cannedResponse);
 
         Advertiser::retrieve(1);
     }

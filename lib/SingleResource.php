@@ -2,7 +2,7 @@
 
 namespace AdButler;
 
-abstract class SingleResource extends ResourceBase  
+abstract class SingleResource extends ResourceBase
 {
     /**
      * @param array $bodyParams
@@ -27,20 +27,23 @@ abstract class SingleResource extends ResourceBase
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    protected static function create($bodyParams = array(), $queryParams = array()) {
+    protected static function create($bodyParams = array(), $queryParams = array())
+    {
         // $bodyParams can be null if data is optional
-        /** @var ListOnlyResource $class */
         $class = get_called_class();
-        $data = static::getDecodedResponse('POST', $class::getResourceURL(), null, $bodyParams, $queryParams);
+        /** @var ListOnlyResource $class */
+        $uri = $class::getResourceURL();
+        $data = self::getDecodedResponse('POST', $uri, $bodyParams, $queryParams);
         if (key_exists('object', $data) && $data['object'] === $class::$type) {
-            return Utils\instantiateRecursively($data, self::$objectToResourceMap); // success: always return a new advertiser object
+            return Utils\instantiateRecursively($data,
+                self::$objectToResourceMap); // success: always return a new advertiser object
         } else {
             self::throwRequestError($data);
         }
     }
 
     /**
-     * @param int   $id
+     * @param int $id
      * @param array $queryParams
      *
      * @return mixed
@@ -62,18 +65,22 @@ abstract class SingleResource extends ResourceBase
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    protected static function retrieve($id, $queryParams=array()) {
+    protected static function retrieve($id, $queryParams = array())
+    {
         // can $params be header parameters?
-        $class = get_called_class(); /** @var ListOnlyResource $class */
-        $data = self::getDecodedResponse('GET', $class::getResourceURL(), $id, null, $queryParams);
+        $class = get_called_class();
+        /** @var ListOnlyResource $class */
+        $uri = $class::getResourceURL($id);
+        $data = self::getDecodedResponse('GET', $uri, null, $queryParams);
 
         // inspect response if it has the correct type
         $isCorrectObjectType = key_exists('object', $data) && $data['object'] === $class::$type;
         if (!$isCorrectObjectType) { // throw an error if it doesn't
             self::throwRequestError($data);
         }
-        
-        return Utils\instantiateRecursively($data, self::$objectToResourceMap); // static method call: instantiate an advertiser object with data
+
+        return Utils\instantiateRecursively($data,
+            self::$objectToResourceMap); // static method call: instantiate an advertiser object with data
     }
 
     /**
@@ -84,7 +91,8 @@ abstract class SingleResource extends ResourceBase
      *
      * @return $this
      */
-    protected function update($bodyParams = array()) {
+    protected function update($bodyParams = array())
+    {
         unset($bodyParams['id']); // always unset ID before updating data by array
         $this->data = array_merge($this->data, $bodyParams);
         return $this;
@@ -114,11 +122,12 @@ abstract class SingleResource extends ResourceBase
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    protected function save($queryParams = array()) {
+    protected function save($queryParams = array())
+    {
         $bodyParams = $this->unsavedValues;
 
         // if no values to save, just return
-        if ( empty($this->unsavedValues) ) {
+        if (empty($this->unsavedValues)) {
             return self::retrieve($this->data['id']); // syncing object with server
         }
 
@@ -135,19 +144,20 @@ abstract class SingleResource extends ResourceBase
 
         // TODO: $params can never be null when updating
 
-        $class = get_called_class(); /** @var ListOnlyResource $class */
-
         // use POST if it's a creative
-        $response = self::getDecodedResponse( ($isCreative ? 'POST' : 'PUT'), $class::getResourceURL(), $id, $bodyParams, $queryParams);
+        $class = get_called_class();
+        /** @var ListOnlyResource $class */
+        $uri = $class::getResourceURL($id);
+        $data = self::getDecodedResponse(($isCreative ? 'POST' : 'PUT'), $uri, $bodyParams, $queryParams);
 
         // inspect response for success or failure
-        if ($response['object'] === $class::$type) {
+        if ($data['object'] === $class::$type) {
             $this->unsavedValues = array(); // resetting the unsaved values array
-            return Utils\instantiateRecursively($response, self::$objectToResourceMap);
-//            return $class::$objectInstance->setData( $response );
+            return Utils\instantiateRecursively($data, self::$objectToResourceMap);
         } else { // failure
-            self::throwRequestError($response);
+            self::throwRequestError($data);
         }
+        return null;
     }
 
     /**
@@ -172,14 +182,16 @@ abstract class SingleResource extends ResourceBase
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    protected function delete($queryParams = array()) {
+    protected function delete($queryParams = array())
+    {
         /** @var ListOnlyResource $class */
         $class = get_called_class();
-        
-        $data = self::getDecodedResponse('DELETE', $class::getResourceURL(), $this->data['id'], null, $queryParams);
-        
+
+        $uri = $class::getResourceURL();
+        $data = self::getDecodedResponse('DELETE', $uri, null, $queryParams);
+
         // inspect response to see if success or error
-        if( key_exists('deleted', $data) && $data['deleted'] ) {
+        if (key_exists('deleted', $data) && $data['deleted']) {
             // cannot unset data; empty the data array
             $this->data = $data;
             return true;
@@ -210,18 +222,20 @@ abstract class SingleResource extends ResourceBase
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    protected static function retrieveAll($queryParams = array()) {
-        /** @var ListOnlyResource $class */
-        $class = get_called_class();
+    protected static function retrieveAll($queryParams = array())
+    {
         $asArray = array_key_exists('array', $queryParams) ? $queryParams['array'] : false;
 
-        $data = self::getDecodedResponse('GET', $class::getResourceURL(), null, null, $queryParams);
+        $class = get_called_class();
+        /** @var ListOnlyResource $class */
+        $uri = $class::getResourceURL();
+        $data = self::getDecodedResponse('GET', $uri, null, $queryParams);
 
         // inspect response for success or failure
         $isListObject = array_key_exists('object', $data) && $data['object'] === 'list';
 
         if ($isListObject) {
-            return Collection::instantiate( $data, $asArray ); // success
+            return Collection::instantiate($data, $asArray); // success
         } else {
             self::throwRequestError($data);
         }

@@ -5,11 +5,11 @@ namespace AdButler;
 use AdButler\Error\InvalidPropertyException;
 
 /**
- * @property-read string  object
+ * @property-read string object
  * @property-read boolean has_more
- * @property-read int     limit
- * @property-read int     offset
- * @property-read string  url
+ * @property-read int limit
+ * @property-read int offset
+ * @property-read string url
  */
 class Collection
 {
@@ -55,7 +55,8 @@ class Collection
      *
      * @return Collection|array
      */
-    public static function instantiate($data = null, $asArray = false) {
+    public static function instantiate($data = null, $asArray = false)
+    {
         $self = $asArray ? array() : new self();
         if (!empty($data)) {
             // instantiate each item in the data array as advertiser object
@@ -76,48 +77,56 @@ class Collection
         return $self;
     }
 
-    public function getData() {
+    public function getData()
+    {
         return $this->data['data'];
     }
 
-    public function setData( $data ) {
+    public function setData($data)
+    {
         $this->data['data'] = $data;
         return $this;
     }
 
-    public function toJSON() {
-        return Utils\toJSON( $this->data, 4, \API::getIndentation() );
+    public function toJSON()
+    {
+        return Utils\toJSON($this->data, 4, \API::getIndentation());
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         $serializedData = "";
 
-        foreach( $this->data['data'] as $resourceObj) {
+        foreach ($this->data['data'] as $resourceObj) {
             $serializedData .= $serializedData == "" ? "" : ",\n";
             $serializedData .= $resourceObj;
         }
-        $serializedData = Utils\str_indent(API::getIndentation()*2, $serializedData); // indent lines by 2 times the API::$indentation value
+        $serializedData = Utils\str_indent(API::getIndentation() * 2,
+            $serializedData); // indent lines by 2 times the API::$indentation value
         unset($this->data['data']);
 
-        $collectionSerialized = get_class($this) . ' JSON: ' . Utils\toJSON( $this->data, 4, API::getIndentation() );
+        $collectionSerialized = get_class($this) . ' JSON: ' . Utils\toJSON($this->data, 4, API::getIndentation());
         $baseIndent = str_repeat(' ', API::getIndentation());
-        $collectionSerialized = substr($collectionSerialized, 0, -2) . ",\n$baseIndent\"data\" : [\n$serializedData\n$baseIndent]\n}";
+        $collectionSerialized = substr($collectionSerialized, 0,
+                -2) . ",\n$baseIndent\"data\" : [\n$serializedData\n$baseIndent]\n}";
 
         return $collectionSerialized;
     }
-    
-    public function __get($field) {
+
+    public function __get($field)
+    {
         $properties = array('object', 'has_more', 'limit', 'offset', 'url', 'data');
-        if ( in_array($field, $properties) ) {
+        if (in_array($field, $properties)) {
             return $this->data[$field];
         } else {
             throw new InvalidPropertyException(array(
                 'object'  => 'error',
                 'type'    => 'invalid_property_exception',
                 'status'  => 400,
-                'message' => "Invalid Property $field. Collection object only supports these properties: " . join(', ', $properties) . ".\n",
+                'message' => "Invalid Property $field. Collection object only supports these properties: " . join(', ',
+                        $properties) . ".\n",
             ));
         }
     }
-    
+
 }

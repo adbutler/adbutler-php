@@ -15,7 +15,7 @@ class MethodNotSupportedErrorTest extends AdButlerTestCase
     {
         $this->setExpectedException(TestUtils::getFQCN('MethodNotSupportedError'));
 
-        $this->setCannedResult( $this->cannedResponse );
+        $this->setCannedResult($this->cannedResponse);
 
         Advertiser::retrieve(-1);
     }

@@ -15,7 +15,7 @@ class MissingResponseErrorTest extends AdButlerTestCase
     {
         $this->setExpectedException(TestUtils::getFQCN('MissingResponseError'));
 
-        $this->setCannedResult( $this->cannedResponse );
+        $this->setCannedResult($this->cannedResponse);
 
         Advertiser::retrieve(1);
     }

@@ -3,25 +3,25 @@
 namespace AdButler;
 
 /**
- * @property-read  int     id
- * @property-read  string  object
- * @property-read  string  self
- * @property       string  name
- * @property       string  title
- * @property       string  content
- * @property       string  destination_url
- * @property       string  display_url
- * @property       int     zone
- * @property       int     campaign
- * @property       string  target_window
- * @property       string  title_alignment
- * @property       string  content_alignment
- * @property       string  display_url_alignment
+ * @property-read  int id
+ * @property-read  string object
+ * @property-read  string self
+ * @property       string name
+ * @property       string title
+ * @property       string content
+ * @property       string destination_url
+ * @property       string display_url
+ * @property       int zone
+ * @property       int campaign
+ * @property       string target_window
+ * @property       string title_alignment
+ * @property       string content_alignment
+ * @property       string display_url_alignment
  */
 class TextAd extends SingleResource
 {
     protected static $type = 'text_ad';
-    protected static $url  = 'text-ads';
+    protected static $url = 'text-ads';
 
     /*
      * Overridden Methods
@@ -51,12 +51,13 @@ class TextAd extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function create($bodyParams = array(), $queryParams = array()) {
+    public static function create($bodyParams = array(), $queryParams = array())
+    {
         return parent::create($bodyParams, $queryParams);
     }
 
     /**
-     * @param int   $id
+     * @param int $id
      * @param array $queryParams
      *
      * @return TextAd
@@ -78,7 +79,8 @@ class TextAd extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieve($id, $queryParams = array()) {
+    public static function retrieve($id, $queryParams = array())
+    {
         return parent::retrieve($id, $queryParams);
     }
 
@@ -87,7 +89,8 @@ class TextAd extends SingleResource
      *
      * @return TextAd
      */
-    public function update($bodyParams = array()) {
+    public function update($bodyParams = array())
+    {
         return parent::update($bodyParams);
     }
 
@@ -113,7 +116,8 @@ class TextAd extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function save($queryParams = array()) {
+    public function save($queryParams = array())
+    {
         return parent::save($queryParams);
     }
 
@@ -139,7 +143,8 @@ class TextAd extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function delete($queryParams = array()) {
+    public function delete($queryParams = array())
+    {
         return parent::delete($queryParams);
     }
 
@@ -165,7 +170,8 @@ class TextAd extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieveAll($queryParams = array()) {
+    public static function retrieveAll($queryParams = array())
+    {
         return parent::retrieveAll($queryParams);
     }
 

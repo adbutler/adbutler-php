@@ -3,19 +3,19 @@
 namespace AdButler;
 
 /**
- * @property-read int     id
- * @property-read string  object
- * @property-read string  self
- * @property      string  name
- * @property      int     range
- * @property      string  unit
+ * @property-read int id
+ * @property-read string object
+ * @property-read string self
+ * @property      string name
+ * @property      int range
+ * @property      string unit
  * @property      boolean inclusive
- * @property      array   areas
+ * @property      array areas
  */
 class GeoTarget extends SingleResource
 {
     protected static $type = 'geo_target';
-    protected static $url  = 'geo-targets';
+    protected static $url = 'geo-targets';
 
     /*
      * Overridden Methods
@@ -45,12 +45,13 @@ class GeoTarget extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function create($bodyParams = array(), $queryParams = array()) {
+    public static function create($bodyParams = array(), $queryParams = array())
+    {
         return parent::create($bodyParams, $queryParams);
     }
 
     /**
-     * @param int   $id
+     * @param int $id
      * @param array $queryParams
      *
      * @return GeoTarget
@@ -72,7 +73,8 @@ class GeoTarget extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieve($id, $queryParams = array()) {
+    public static function retrieve($id, $queryParams = array())
+    {
         return parent::retrieve($id, $queryParams);
     }
 
@@ -81,7 +83,8 @@ class GeoTarget extends SingleResource
      *
      * @return GeoTarget
      */
-    public function update($bodyParams = array()) {
+    public function update($bodyParams = array())
+    {
         return parent::update($bodyParams);
     }
 
@@ -107,7 +110,8 @@ class GeoTarget extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function save($queryParams = array()) {
+    public function save($queryParams = array())
+    {
         return parent::save($queryParams);
     }
 
@@ -133,7 +137,8 @@ class GeoTarget extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function delete($queryParams = array()) {
+    public function delete($queryParams = array())
+    {
         return parent::delete($queryParams);
     }
 
@@ -159,7 +164,8 @@ class GeoTarget extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieveAll($queryParams = array()) {
+    public static function retrieveAll($queryParams = array())
+    {
         return parent::retrieveAll($queryParams);
     }
 

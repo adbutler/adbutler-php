@@ -15,7 +15,7 @@ class UndefinedAPIKeyErrorTest extends AdButlerTestCase
     {
         $this->setExpectedException(TestUtils::getFQCN('UndefinedAPIKeyError'));
 
-        $this->setCannedResult( $this->cannedResponse );
+        $this->setCannedResult($this->cannedResponse);
 
         Advertiser::create(array());
     }

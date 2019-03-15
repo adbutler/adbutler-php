@@ -2,7 +2,7 @@
 
 namespace AdButler;
 
-class ResourceNotFoundErrorTest extends AdButlerTestCase  
+class ResourceNotFoundErrorTest extends AdButlerTestCase
 {
     private $cannedResponse = array(
         'object'  => 'error',
@@ -10,13 +10,13 @@ class ResourceNotFoundErrorTest extends AdButlerTestCase
         'status'  => 404,
         'message' => 'Resource not found.'
     );
-    
+
     public function testThrowingOfError()
     {
         $this->setExpectedException(TestUtils::getFQCN('ResourceNotFoundError'));
-        
-        $this->setCannedResult( $this->cannedResponse );
-        
+
+        $this->setCannedResult($this->cannedResponse);
+
         Advertiser::retrieve(-1);
     }
 }

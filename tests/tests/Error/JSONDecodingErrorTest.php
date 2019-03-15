@@ -15,7 +15,7 @@ class JSONDecodingErrorTest extends AdButlerTestCase
     {
         $this->setExpectedException(TestUtils::getFQCN('JSONDecodingError'));
 
-        $this->setCannedResult( $this->cannedResponse );
+        $this->setCannedResult($this->cannedResponse);
 
         Advertiser::create(array());
     }

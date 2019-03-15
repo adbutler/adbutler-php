@@ -3,16 +3,19 @@
 namespace AdButler\Utils;
 
 /**
- * @param array $arr 
+ * @param array $arr
  * @param array $map A map mapping resource object type to the PHP class name
  *
  * @return object mixed
  */
-function instantiateRecursively($arr, &$map) {
+function instantiateRecursively($arr, &$map)
+{
     $arrFields = array_filter($arr, 'is_array');
-    if (!empty($arrFields))
-        foreach ($arrFields as $field => $value)
+    if (!empty($arrFields)) {
+        foreach ($arrFields as $field => $value) {
             $arr[$field] = key_exists('object', $value) ? instantiateRecursively($value, $map) : $value;
+        }
+    }
     $class = key_exists($arr['object'], $map) ? $map[$arr['object']] : null;
     return empty($class) ? $arr : new $class($arr);
 }
@@ -20,47 +23,53 @@ function instantiateRecursively($arr, &$map) {
 /**
  * Indents the string by given number of space characters.
  * Default number of space characters is 0 which amounts to un-indenting the string.
- * 
+ *
  * Example: (int, string) -> string
  *     str_indent(4, 'hello');    //=> '    hello'
  *     str_indent(0, '   hello'); //=> '    hello'
  *     str_indent(2, '   hello'); //=> '      hello'
- * 
+ *
  * @param int $char
  * @param $str
  * @return string
  */
-function str_indent($char = 0, $str) {
-    return _unlines(array_map(function($v) use($char){
+function str_indent($char = 0, $str)
+{
+    return _unlines(array_map(function ($v) use ($char) {
         return str_repeat(" ", $char) . $v;
     }, _lines($str)));
 }
 
-function stringifyBool($bool) {
+function stringifyBool($bool)
+{
     return $bool ? 'true' : 'false';
 }
 
-function toJSON( $data, $oldIndent, $newIndent ) {
+function toJSON($data, $oldIndent, $newIndent)
+{
     if (defined('JSON_UNESCAPED_SLASHES') && defined('JSON_UNESCAPED_UNICODE') && defined('JSON_PRETTY_PRINT')) {
-        $encodedJSON = json_encode($data, JSON_NUMERIC_CHECK | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-    } else {    
-        $encodedJSON = pretty_json(json_unescape_slashes(json_unescape_unicode(json_encode($data, JSON_NUMERIC_CHECK))));
+        $encodedJSON = json_encode($data,
+            JSON_NUMERIC_CHECK | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    } else {
+        $encodedJSON = pretty_json(json_unescape_slashes(json_unescape_unicode(json_encode($data,
+            JSON_NUMERIC_CHECK))));
     }
-    return changeIndentationOfJSONString( $encodedJSON, $oldIndent, $newIndent );
+    return changeIndentationOfJSONString($encodedJSON, $oldIndent, $newIndent);
 }
 
 /**
  * Only to support pretty JSON output in PHP 5.3
  * This function can be safely removed when we drop support for PHP 5.3.x.
- * 
+ *
  * Source:
  *   [1]: http://stackoverflow.com/a/24933162
  *   [2]: https://3v4l.org/XslFJ#v530
- * 
+ *
  * @param $escapedJSONString
  * @return mixed
  */
-function json_unescape_unicode( $escapedJSONString ) {
+function json_unescape_unicode($escapedJSONString)
+{
     // Source: http://stackoverflow.com/a/24933162
     $unescapedJSONString = preg_replace_callback('/(?<!\\\\)\\\\u(\w{4})/', function ($matches) {
         return html_entity_decode('&#x' . $matches[1] . ';', ENT_COMPAT, 'UTF-8');
@@ -71,37 +80,39 @@ function json_unescape_unicode( $escapedJSONString ) {
 /**
  * Only to  pretty JSON output in PHP 5.3.x.
  * This function can be safely removed when we drop support for PHP 5.3.x.
- * 
+ *
  * @param $escapedJSONString
  * @return mixed
  */
-function json_unescape_slashes( $escapedJSONString ) {
+function json_unescape_slashes($escapedJSONString)
+{
     return preg_replace('/\\\\\//', '/', $escapedJSONString);
 }
 
 /**
  * Only to support pretty JSON output in PHP 5.3
  * This function can be safely removed when we drop support for PHP 5.3.x.
- * 
+ *
  * Source:
  *   [1]: http://stackoverflow.com/a/8014854
  *   [2]: http://snipplr.com/view/60559/prettyjson
- * 
+ *
  * Modified by: Wasif Hasan Baig <baig@sparklit.com>
- * 
+ *
  * @param $json
  * @return string
  */
-function pretty_json($json) {
-    $result      = '';
-    $pos         = 0;
-    $strLen      = strlen($json);
-    $indentStr   = '  ';
-    $newLine     = "\n";
-    $prevChar    = '';
+function pretty_json($json)
+{
+    $result = '';
+    $pos = 0;
+    $strLen = strlen($json);
+    $indentStr = '  ';
+    $newLine = "\n";
+    $prevChar = '';
     $outOfQuotes = true;
 
-    for ($i=0; $i<=$strLen; $i++) {
+    for ($i = 0; $i <= $strLen; $i++) {
 
         // Grab the next character in the string.
         $char = substr($json, $i, 1);
@@ -112,17 +123,19 @@ function pretty_json($json) {
 
             // If this character is the end of an element, 
             // output a new line and indent the next line.
-        } else if(($char == '}' || $char == ']') && $outOfQuotes) {
-            $result .= $newLine;
-            $pos --;
-            for ($j=0; $j<$pos; $j++) {
-                $result .= $indentStr;
+        } else {
+            if (($char == '}' || $char == ']') && $outOfQuotes) {
+                $result .= $newLine;
+                $pos--;
+                for ($j = 0; $j < $pos; $j++) {
+                    $result .= $indentStr;
+                }
             }
         }
 
         // Add the character to the result string.
         $result .= $char;
-        
+
         if ($char == ':' && $outOfQuotes) {
             $result .= ' ';
         }
@@ -132,7 +145,7 @@ function pretty_json($json) {
         if (($char == ',' || $char == '{' || $char == '[') && $outOfQuotes) {
             $result .= $newLine;
             if ($char == '{' || $char == '[') {
-                $pos ++;
+                $pos++;
             }
 
             for ($j = 0; $j < $pos; $j++) {
@@ -149,17 +162,20 @@ function pretty_json($json) {
 // Private Functions
 // =============================================================================
 
-function _lines($str) {
+function _lines($str)
+{
     return explode("\n", $str);
 }
 
-function _unlines($arr) {
+function _unlines($arr)
+{
     return join("\n", $arr);
 }
 
 
-function rmJSONCurlies( $jsonStr ) {
-    return substr( trim($jsonStr), 1, -1); // removes opening and closing curlies (curly braces)
+function rmJSONCurlies($jsonStr)
+{
+    return substr(trim($jsonStr), 1, -1); // removes opening and closing curlies (curly braces)
 }
 
 /**
@@ -169,11 +185,12 @@ function rmJSONCurlies( $jsonStr ) {
  *
  * @return string
  */
-function changeIndentationOfJSONString($jsonStr, $oldIndent, $newIndent=2) {
-    $jsonLinesSansCurlies = array_filter( _lines(rmJSONCurlies($jsonStr)), function($x) {
-        return ! empty($x);
+function changeIndentationOfJSONString($jsonStr, $oldIndent, $newIndent = 2)
+{
+    $jsonLinesSansCurlies = array_filter(_lines(rmJSONCurlies($jsonStr)), function ($x) {
+        return !empty($x);
     });
-    $str = array_map( changeIndent($oldIndent, $newIndent), $jsonLinesSansCurlies);
+    $str = array_map(changeIndent($oldIndent, $newIndent), $jsonLinesSansCurlies);
     return "{\n" . _unlines($str) . "\n}";
 }
 
@@ -185,7 +202,8 @@ function changeIndentationOfJSONString($jsonStr, $oldIndent, $newIndent=2) {
  * @param  $str
  * @return bool|int
  */
-function firstCharIndex( $str ) {
+function firstCharIndex($str)
+{
     return strpos($str, mb_substr(ltrim($str), 0, 1));
 }
 
@@ -195,9 +213,10 @@ function firstCharIndex( $str ) {
  * @param  $oldIndent
  * @return callable
  */
-function changeIndent( $oldIndent, $newIndent ) {
-    return function($str) use($newIndent, $oldIndent) {
-        return str_indent(firstCharIndex($str) * $newIndent / $oldIndent , ltrim($str));
+function changeIndent($oldIndent, $newIndent)
+{
+    return function ($str) use ($newIndent, $oldIndent) {
+        return str_indent(firstCharIndex($str) * $newIndent / $oldIndent, ltrim($str));
     };
 }
 

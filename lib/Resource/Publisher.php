@@ -3,20 +3,20 @@
 namespace AdButler;
 
 /**
- * @property-read int       id
- * @property-read string    object
- * @property-read string    self
- * @property      string    name
- * @property      string    email
- * @property      bool      can_admin_account
- * @property      bool      can_approve_ads
- * @property      bool      can_change_password
+ * @property-read int id
+ * @property-read string object
+ * @property-read string self
+ * @property      string name
+ * @property      string email
+ * @property      bool can_admin_account
+ * @property      bool can_approve_ads
+ * @property      bool can_change_password
  * @property      int|float default_payout_percent
  */
 class Publisher extends SingleResource
 {
     protected static $type = 'publisher';
-    protected static $url  = 'publishers';
+    protected static $url = 'publishers';
 
     /*
      * Overridden Methods
@@ -46,12 +46,13 @@ class Publisher extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function create($bodyParams = array(), $queryParams = array()) {
+    public static function create($bodyParams = array(), $queryParams = array())
+    {
         return parent::create($bodyParams, $queryParams);
     }
 
     /**
-     * @param int   $id
+     * @param int $id
      * @param array $queryParams
      *
      * @return Publisher
@@ -73,7 +74,8 @@ class Publisher extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieve($id, $queryParams = array()) {
+    public static function retrieve($id, $queryParams = array())
+    {
         return parent::retrieve($id, $queryParams);
     }
 
@@ -82,7 +84,8 @@ class Publisher extends SingleResource
      *
      * @return Publisher
      */
-    public function update($bodyParams = array()) {
+    public function update($bodyParams = array())
+    {
         return parent::update($bodyParams);
     }
 
@@ -108,7 +111,8 @@ class Publisher extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function save($queryParams = array()) {
+    public function save($queryParams = array())
+    {
         return parent::save($queryParams);
     }
 
@@ -134,7 +138,8 @@ class Publisher extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function delete($queryParams = array()) {
+    public function delete($queryParams = array())
+    {
         return parent::delete($queryParams);
     }
 
@@ -160,7 +165,8 @@ class Publisher extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieveAll($queryParams = array()) {
+    public static function retrieveAll($queryParams = array())
+    {
         return parent::retrieveAll($queryParams);
     }
 

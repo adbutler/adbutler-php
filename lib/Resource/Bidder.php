@@ -3,18 +3,18 @@
 namespace AdButler;
 
 /**
- * @property-read  int     id
- * @property-read  string  object
- * @property-read  string  self
- * @property       string  bidder_code
- * @property-read  string  created_date
- * @property       string  name
- * @property       array   parameters
+ * @property-read  int id
+ * @property-read  string object
+ * @property-read  string self
+ * @property       string bidder_code
+ * @property-read  string created_date
+ * @property       string name
+ * @property       array parameters
  */
 class Bidder extends SingleResource
 {
     protected static $type = 'bidder';
-    protected static $url  = 'bidders';
+    protected static $url = 'bidders';
 
     /*
      * Overridden Methods
@@ -44,12 +44,13 @@ class Bidder extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function create($bodyParams = array(), $queryParams = array()) {
+    public static function create($bodyParams = array(), $queryParams = array())
+    {
         return parent::create($bodyParams, $queryParams);
     }
 
     /**
-     * @param int   $id
+     * @param int $id
      * @param array $queryParams
      *
      * @return Bidder
@@ -71,7 +72,8 @@ class Bidder extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieve($id, $queryParams = array()) {
+    public static function retrieve($id, $queryParams = array())
+    {
         return parent::retrieve($id, $queryParams);
     }
 
@@ -80,7 +82,8 @@ class Bidder extends SingleResource
      *
      * @return Bidder
      */
-    public function update($bodyParams = array()) {
+    public function update($bodyParams = array())
+    {
         return parent::update($bodyParams);
     }
 
@@ -106,7 +109,8 @@ class Bidder extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function save($queryParams = array()) {
+    public function save($queryParams = array())
+    {
         unset($this->unsavedValues['has_password']);
         return parent::save($queryParams);
     }
@@ -133,7 +137,8 @@ class Bidder extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function delete($queryParams = array()) {
+    public function delete($queryParams = array())
+    {
         return parent::delete($queryParams);
     }
 
@@ -159,7 +164,8 @@ class Bidder extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieveAll($queryParams = array()) {
+    public static function retrieveAll($queryParams = array())
+    {
         return parent::retrieveAll($queryParams);
     }
 

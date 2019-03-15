@@ -2,7 +2,7 @@
 
 namespace AdButler\Error;
 
-class UndefinedRequestParametersError extends APIException 
+class UndefinedRequestParametersError extends APIException
 {
 
 }

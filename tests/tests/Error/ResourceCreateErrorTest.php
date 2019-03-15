@@ -15,7 +15,7 @@ class ResourceCreateErrorTest extends AdButlerTestCase
     {
         $this->setExpectedException(TestUtils::getFQCN('ResourceCreateError'));
 
-        $this->setCannedResult( $this->cannedResponse );
+        $this->setCannedResult($this->cannedResponse);
 
         Advertiser::create(array());
     }

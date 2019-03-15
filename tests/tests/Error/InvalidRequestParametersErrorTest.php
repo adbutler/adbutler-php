@@ -2,7 +2,7 @@
 
 namespace AdButler;
 
-class InvalidRequestParametersErrorTest extends AdButlerTestCase  
+class InvalidRequestParametersErrorTest extends AdButlerTestCase
 {
     private $cannedResponse = array(
         'object'     => 'error',
@@ -16,17 +16,17 @@ class InvalidRequestParametersErrorTest extends AdButlerTestCase
             )
         )
     );
-    
+
     public function testThrowingOfError()
     {
         $this->setExpectedException(TestUtils::getFQCN('InvalidRequestParametersError'));
-        
-        $this->setCannedResult( $this->cannedResponse );
-        
+
+        $this->setCannedResult($this->cannedResponse);
+
         $resource = Advertiser::retrieve(1);
-        
+
         $resource->can_add_banners = 3;
-        
+
         $resource->save();
     }
 }

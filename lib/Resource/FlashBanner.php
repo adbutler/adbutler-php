@@ -3,27 +3,27 @@
 namespace AdButler;
 
 /**
- * @property-read  int         id
- * @property-read  string      object
- * @property-read  string      self
- * @property-read  string      created_date
+ * @property-read  int id
+ * @property-read  string object
+ * @property-read  string self
+ * @property-read  string created_date
  * @property-read  string|null last_modified
- * @property       string      name
- * @property       int         width
- * @property       int         height
- * @property       string      location
- * @property       string      tracking_pixel
- * @property       string      html_content_below
- * @property-write int         creative
- * @property-write string      creativeURL
- * @property-write string      mode
- * @property-write string      quality
- * @property-write int         version
+ * @property       string name
+ * @property       int width
+ * @property       int height
+ * @property       string location
+ * @property       string tracking_pixel
+ * @property       string html_content_below
+ * @property-write int creative
+ * @property-write string creativeURL
+ * @property-write string mode
+ * @property-write string quality
+ * @property-write int version
  */
 class FlashBanner extends SingleResource
 {
     protected static $type = 'flash_banner';
-    protected static $url  = 'banners/flash';
+    protected static $url = 'banners/flash';
 
     /*
      * Overridden Methods
@@ -53,12 +53,13 @@ class FlashBanner extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function create($bodyParams = array(), $queryParams = array()) {
+    public static function create($bodyParams = array(), $queryParams = array())
+    {
         return parent::create($bodyParams, $queryParams);
     }
 
     /**
-     * @param int   $id
+     * @param int $id
      * @param array $queryParams
      *
      * @return FlashBanner
@@ -80,7 +81,8 @@ class FlashBanner extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieve($id, $queryParams = array()) {
+    public static function retrieve($id, $queryParams = array())
+    {
         return parent::retrieve($id, $queryParams);
     }
 
@@ -89,7 +91,8 @@ class FlashBanner extends SingleResource
      *
      * @return FlashBanner
      */
-    public function update($bodyParams = array()) {
+    public function update($bodyParams = array())
+    {
         return parent::update($bodyParams);
     }
 
@@ -115,7 +118,8 @@ class FlashBanner extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function save($queryParams = array()) {
+    public function save($queryParams = array())
+    {
         return parent::save($queryParams);
     }
 
@@ -141,7 +145,8 @@ class FlashBanner extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function delete($queryParams = array()) {
+    public function delete($queryParams = array())
+    {
         return parent::delete($queryParams);
     }
 
@@ -167,7 +172,8 @@ class FlashBanner extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieveAll($queryParams = array()) {
+    public static function retrieveAll($queryParams = array())
+    {
         return parent::retrieveAll($queryParams);
     }
 

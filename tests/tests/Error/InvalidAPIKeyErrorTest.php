@@ -14,9 +14,9 @@ class InvalidAPIKeyErrorTest extends AdButlerTestCase
     public function testThrowingOfError()
     {
         $this->setExpectedException(TestUtils::getFQCN('InvalidAPIKeyError'));
-        
-        $this->setCannedResult( $this->cannedResponse );
-        
+
+        $this->setCannedResult($this->cannedResponse);
+
         Advertiser::create(array());
     }
 }

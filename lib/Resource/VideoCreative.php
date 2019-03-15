@@ -3,24 +3,24 @@
 namespace AdButler;
 
 /**
- * @property-read  int    id
+ * @property-read  int id
  * @property-read  string object
  * @property-read  string self
  * @property-read  string file_name
- * @property-read  int    file_size
- * @property-read  int    mime_code
+ * @property-read  int file_size
+ * @property-read  int mime_code
  * @property-read  string upload_time
- * @property-read  int    width
- * @property-read  int    height
+ * @property-read  int width
+ * @property-read  int height
  * @property       string name
- * @property       int    group
+ * @property       int group
  * @property       string description
  * @property-write string file
  */
 class VideoCreative extends CreativeSingleResource
 {
     protected static $type = 'video_creative';
-    protected static $url  = 'creatives/video';
+    protected static $url = 'creatives/video';
 
     /*
      * Overridden Methods
@@ -50,12 +50,13 @@ class VideoCreative extends CreativeSingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function create($bodyParams = array(), $queryParams = array()) {
+    public static function create($bodyParams = array(), $queryParams = array())
+    {
         return parent::create($bodyParams, $queryParams);
     }
 
     /**
-     * @param int   $id
+     * @param int $id
      * @param array $queryParams
      *
      * @return VideoCreative
@@ -77,7 +78,8 @@ class VideoCreative extends CreativeSingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieve($id, $queryParams = array()) {
+    public static function retrieve($id, $queryParams = array())
+    {
         return parent::retrieve($id, $queryParams);
     }
 
@@ -86,7 +88,8 @@ class VideoCreative extends CreativeSingleResource
      *
      * @return VideoCreative
      */
-    public function update($bodyParams = array()) {
+    public function update($bodyParams = array())
+    {
         return parent::update($bodyParams);
     }
 
@@ -112,7 +115,8 @@ class VideoCreative extends CreativeSingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function save($queryParams = array()) {
+    public function save($queryParams = array())
+    {
         return parent::save($queryParams);
     }
 
@@ -138,7 +142,8 @@ class VideoCreative extends CreativeSingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function delete($queryParams = array()) {
+    public function delete($queryParams = array())
+    {
         return parent::delete($queryParams);
     }
 
@@ -164,7 +169,8 @@ class VideoCreative extends CreativeSingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieveAll($queryParams = array()) {
+    public static function retrieveAll($queryParams = array())
+    {
         return parent::retrieveAll($queryParams);
     }
 

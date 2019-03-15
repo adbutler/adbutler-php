@@ -4,9 +4,10 @@ namespace AdButler;
 
 class FileUploadTest extends TestUtils
 {
-    private $apiKey  = 'API_KEY';
+    private $apiKey = 'API_KEY';
 
-    public function getFileUploadData() {
+    public function getFileUploadData()
+    {
         return array(
             'name'        => 'xyz',
             'file'        => 'data/image1.png',
@@ -16,9 +17,11 @@ class FileUploadTest extends TestUtils
     }
 
     // Tests the CURL headers
-    public function testFileUpload() {
-        CURLClient::init(array('api_key'=>$this->apiKey));
-        $headers = $this->invokeMethod('AdButler\CURLClient', 'constructCURLOptionsArray', array('POST', $this->getFileUploadData()));
+    public function testFileUpload()
+    {
+        CURLClient::init(array('api_key' => $this->apiKey));
+        $headers = $this->invokeMethod('AdButler\CURLClient', 'constructCURLOptionsArray',
+            array('POST', $this->getFileUploadData()));
 
         $this->assertFalse($headers[CURLOPT_HTTPGET]);
         $this->assertTrue($headers[CURLOPT_POST]);

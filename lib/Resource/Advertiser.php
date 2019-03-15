@@ -3,20 +3,20 @@
 namespace AdButler;
 
 /**
- * @property-read  int     id
- * @property-read  string  object
- * @property-read  string  self
- * @property       string  name
- * @property       string  email
- * @property-write string  password
- * @property-read  string  has_password
+ * @property-read  int id
+ * @property-read  string object
+ * @property-read  string self
+ * @property       string name
+ * @property       string email
+ * @property-write string password
+ * @property-read  string has_password
  * @property       boolean can_add_banners
  * @property       boolean can_change_password
  */
 class Advertiser extends SingleResource
 {
     protected static $type = 'advertiser';
-    protected static $url  = 'advertisers';
+    protected static $url = 'advertisers';
 
     /*
      * Overridden Methods
@@ -46,12 +46,13 @@ class Advertiser extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function create($bodyParams = array(), $queryParams = array()) {
+    public static function create($bodyParams = array(), $queryParams = array())
+    {
         return parent::create($bodyParams, $queryParams);
     }
 
     /**
-     * @param int   $id
+     * @param int $id
      * @param array $queryParams
      *
      * @return Advertiser
@@ -73,7 +74,8 @@ class Advertiser extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieve($id, $queryParams = array()) {
+    public static function retrieve($id, $queryParams = array())
+    {
         return parent::retrieve($id, $queryParams);
     }
 
@@ -82,7 +84,8 @@ class Advertiser extends SingleResource
      *
      * @return Advertiser
      */
-    public function update($bodyParams = array()) {
+    public function update($bodyParams = array())
+    {
         return parent::update($bodyParams);
     }
 
@@ -108,7 +111,8 @@ class Advertiser extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function save($queryParams = array()) {
+    public function save($queryParams = array())
+    {
         unset($this->unsavedValues['has_password']);
         return parent::save($queryParams);
     }
@@ -135,7 +139,8 @@ class Advertiser extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function delete($queryParams = array()) {
+    public function delete($queryParams = array())
+    {
         return parent::delete($queryParams);
     }
 
@@ -161,7 +166,8 @@ class Advertiser extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieveAll($queryParams = array()) {
+    public static function retrieveAll($queryParams = array())
+    {
         return parent::retrieveAll($queryParams);
     }
 
@@ -170,12 +176,14 @@ class Advertiser extends SingleResource
      * =========================
      */
 
-    public function addCampaign($params = null) {
+    public function addCampaign($params = null)
+    {
         // adds a new campaign for this advertiser
         // returns \AdButler\Campaign object
     }
 
-    public function campaigns($params = null) {
+    public function campaigns($params = null)
+    {
         // returns all the campaigns of the advertiser
         // returns array of \AdButler\Collection of \AdButler\Campaign objects
     }
