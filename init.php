@@ -7,6 +7,9 @@ require_once(dirname(__FILE__) . '/lib/ListOnlyResource.php');
 require_once(dirname(__FILE__) . '/lib/SingleResource.php');
 require_once(dirname(__FILE__) . '/lib/ReadOnlyResource.php');
 
+// Interfaces
+require_once(dirname(__FILE__) . '/lib/RouterInterface.php');
+
 // Utilities
 require_once(dirname(__FILE__) . '/lib/Utils.php');
 

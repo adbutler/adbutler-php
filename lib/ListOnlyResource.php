@@ -11,13 +11,31 @@ abstract class ListOnlyResource extends ResourceBase
      * @param  array $params
      *
      * @return Collection|array
+     * @throws Error\APIError
+     * @throws Error\InvalidAPIKeyError
+     * @throws Error\InvalidAccountError
+     * @throws Error\InvalidRequestError
+     * @throws Error\InvalidRequestParametersError
+     * @throws Error\InvalidResourceError
+     * @throws Error\JSONDecodingError
+     * @throws Error\JSONEncodingError
+     * @throws Error\MethodNotSupportedError
+     * @throws Error\MissingResponseError
+     * @throws Error\ResourceCreateError
+     * @throws Error\ResourceNotFoundError
+     * @throws Error\UndefinedAPIKeyError
+     * @throws Error\UndefinedRequestParametersError
+     * @throws Error\UndefinedResponseError
      */
     protected static function retrieveAll($params = array()) {
-        /** @var ListOnlyResource $class */
-        $class = get_called_class();
-        $asArray = array_key_exists('array', $params) ? $params['array'] : false;
 
-        $data = self::getDecodedResponse('GET', $class::getResourceURL(), null, null, $params);
+        // $bodyParams can be null if data is optional
+        $class = get_called_class();
+        /** @var ListOnlyResource $class */
+        $uri = $class::getResourceURL();
+        $data = self::getDecodedResponse('GET', $uri, null, $params);
+        
+        $asArray = array_key_exists('array', $params) ? $params['array'] : false;
 
         // inspect response for success or failure
         $isListObject = array_key_exists('object', $data) && $data['object'] === 'list';

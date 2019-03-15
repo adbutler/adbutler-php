@@ -46,7 +46,3 @@ class Stats extends ReadOnlyResource
      */
 
 }
-
-
-//http://api.adbutler.com.baig.dev/v1/stats?type=publisher&from=2016-09-01T00:00:00+00:00&to=2016-10-15T16:00:00+00:00&period=year
-//http://api.adbutler.com.baig.dev/v1/stats?type=publisher&from=2016-09-01T00:00:00+00:00&to=2016-10-15T16:00:00+00:00&period=year

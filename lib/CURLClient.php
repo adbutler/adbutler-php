@@ -6,10 +6,12 @@ use AdButler\Error\APIConnectionError;
 use AdButler\Error\UndefinedRequestParametersError;
 use AdButler\Error\UndefinedAPIKeyError;
 
-class CURLClient
+class CURLClient implements RouterInterface
 {
     private static $api = null;
     private static $instance;
+    private static $baseURL;
+    private static $version;
     protected $defaultOptions;
 
     private $timeout = 80;
@@ -24,8 +26,16 @@ class CURLClient
         return self::$instance;
     }
 
+    /**
+     * @param array $config
+     * @return mixed|void
+     * @throws UndefinedAPIKeyError
+     */
     public static function init( $config = array() ) {
         self::$instance = self::getInstance();
+        self::$baseURL = $config['base_url'];
+        self::$version = $config['version'];
+        
         if ( key_exists('api_key', $config) ) {
             self::$api = $config['api_key'];
         } else {
@@ -154,17 +164,14 @@ class CURLClient
 
     /**
      * @param $method
-     * @param $url
-     * @param null $id
+     * @param $uri
      * @param null $bodyParams - POST or PUT data
      * @param array $queryParams - Filter parameters e.g. zoneID when filtering placements by zone ID
-     * @param array $opts - Response modifiers e.g. limit, fields.
-     *
      * @return mixed
      * @throws APIConnectionError
      * @throws UndefinedRequestParametersError
      */
-    public static function request($method, $url, $id = null, $bodyParams = null, $queryParams = array(), $opts = array()) {
+    public static function request($method, $uri, $bodyParams = null, $queryParams = array()) {
 
         // throwing error if no data given for POST or PUT request
         if ( ($method === 'POST' || $method === 'PUT') && is_null($bodyParams) ) {
@@ -175,21 +182,21 @@ class CURLClient
                 'message' => 'data cannot be null for POST/PUT',
             ));
         }
-        
-        $requestURL  = self::constructRequestURL($url, $id, $queryParams, $opts);
+
+        $requestURL  = self::constructRequestURL($uri, $queryParams);
         $curlOptions = self::constructCURLOptionsArray($method, $bodyParams);
         $response    = static::_makeRequest($requestURL, $curlOptions);
 
         // CURL Error Handling
         if ($response['error_number'] !== CURLE_OK) {
-            $curlErrorMessage = self::getCURLErrorMessage($url, $response['error_number'], $response['error_message']);
+            $curlErrorMessage = self::getCURLErrorMessage($uri, $response['error_number'], $response['error_message']);
             throw new APIConnectionError(array(
                 'object'  => 'error',
                 'type'    => 'api_connection_error',
                 'message' => $curlErrorMessage,
             ));
         }
-        
+
         return $response['response'];
     }
     
@@ -262,28 +269,23 @@ class CURLClient
 
     /**
      * @param  string $url
-     * @param  int    $id
-     * @param  array  $queryParams
-     * @param  array  $opts
-     *
+     * @param  array $queryParams
      * @return string
      */
-    public static function constructRequestURL($url, $id, $queryParams, $opts) {
-        $qParams = $queryParams + $opts;
-        
-        if (array_key_exists('fields', $qParams)) {
-            $qParams['fields'] = join(',', array_map('rawurlencode', $qParams['fields']));
+    public static function constructRequestURL($url, $queryParams)
+    {
+        if (array_key_exists('fields', $queryParams)) {
+            $queryParams['fields'] = join(',', array_map('rawurlencode', $queryParams['fields']));
         }
-        
-        $qParams = empty($qParams) ? "" : "?" . http_build_query($qParams);
-        
-        $id = empty($id) ? "" : "/$id";
-        
+
+        $queryParamStr = empty($queryParams) ? "" : "?" . http_build_query($queryParams);
+
         // TODO: add all parameters to the URL. Also URL encode it
         // TODO: add all options to the URL. Also URL encode it.
-        return "$url$id$qParams";
+        return self::$baseURL . $url . $queryParamStr;
     }
-    
+
+
     /**
      * @param $url
      * @param $errNum

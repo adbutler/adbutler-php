@@ -6,13 +6,11 @@ abstract class ResourceBase
 {
     protected static $curlClient = null;
 
-    protected static $type    = null; // override in sub-class
-    protected static $url     = null; // override in sub-class
-    protected static $apiKey  = null; // set when instantiating
-    protected static $version = "v1";
-    protected static $baseURL = "https://api.adbutler.com";
+    protected static $type = null; // override in sub-class
+    protected static $url = null; // override in sub-class
+    protected static $apiKey = null; // set when instantiating
 
-    protected static $objectInstance     = null;
+    protected static $objectInstance = null;
     protected static $collectionInstance = null;
 
     protected $data = array();
@@ -63,69 +61,64 @@ abstract class ResourceBase
      *
      * @throws Error\UndefinedCURLClientError
      */
-    public static function init( $opts = array() ) {
-        if ( key_exists('curl_client', $opts) ) {
-            self::$curlClient = $opts['curl_client'];
-        } else {
-            throw new Error\UndefinedCURLClientError(array(
-                'object'  => 'error',
-                'type'    => 'undefined_curl_client_error',
-                'message' => "Please specify a CURL Client for making HTTP requests.",
-            ));
-        }
+    public static function init($opts = array())
+    {
+        //
     }
 
     /**
      * Resource constructor.
      * @param array $data
      */
-    public function __construct( $data = array(), $opts = array() ) {
+    public function __construct($data = array(), $opts = array())
+    {
         if (!empty($opts) && key_exists('curl-client', $opts)) {
             self::$curlClient = $opts['curl-client'];
         }
-        if (!empty($data))
-            $this->data = $data; // set data if given
+        if (!empty($data)) {
+            $this->data = $data;
+        } // set data if given
         self::$objectInstance = $this; // cache reference to itself
         return $this; // return the instance
     }
 
-    public function toArray() {
+    public function toArray()
+    {
         return $this->data;
     }
 
-    public function getData() {
+    public function getData()
+    {
         return $this->data;
     }
 
-    public function setData( $data ) {
+    public function setData($data)
+    {
         $this->data = $data;
         return $this;
     }
 
-    protected static function getResourceURL() {
-        return self::$baseURL.'/'.self::$version.'/'.static::$url;
+    protected static function getResourceURL($id = null)
+    {
+        return '/' . self::$version . '/' . static::$url . ($id ? '/' . $id : '');
     }
 
     /**
      * @param       $method
      * @param       $url
-     * @param null  $id
-     * @param null  $bodyParams   POST or PUT  data
+     * @param null $bodyParams POST or PUT  data
      * @param array $queryParams like zoneID when filtering placement by zones
-     * @param array $opts   anything that modifies the output response like limit, fields etc.
-     *
      * @return array|mixed
      * @throws Error\JSONDecodingError
-     * @throws Error\APIConnectionError
-     * @throws Error\UndefinedRequestParametersError
      */
-    protected static function getDecodedResponse($method, $url, $id = null, $bodyParams = null, $queryParams = array(), $opts = array() ) {
-        // make request to url and don't validate data on the client side
-        $curlClient = self::$curlClient; /** @var CURLClient $curlClient */
-        $response = $curlClient::request($method, $url, $id, $bodyParams, $queryParams, $opts);
+    protected static function getDecodedResponse($method, $url, $bodyParams = null, $queryParams = array())
+    {
+        // retrieve the router used (curl or custom) and use the request interface
+        $router = API::getRouter();
+        $response = $router::request($method, $url, $bodyParams, $queryParams);
 
         // decode response as associative array
-        $result = json_decode( $response, true );
+        $result = json_decode($response, true);
 
         // decode response as associative array
         if (json_last_error() !== JSON_ERROR_NONE) {
@@ -140,23 +133,24 @@ abstract class ResourceBase
      *
      * @throws Error\JSONDecodingError
      */
-    private static function throwJSONError($jsonLastError) {
+    private static function throwJSONError($jsonLastError)
+    {
         switch ($jsonLastError) {
             case JSON_ERROR_DEPTH:
-                throw new Error\JSONDecodingError('The maximum stack depth has been exceeded.');
+                throw new Error\JSONDecodingError(['message' => 'The maximum stack depth has been exceeded.']);
             case JSON_ERROR_STATE_MISMATCH:
-                throw new Error\JSONDecodingError('Invalid or malformed JSON.');
+                throw new Error\JSONDecodingError(['message' => 'Invalid or malformed JSON.']);
             case JSON_ERROR_CTRL_CHAR:
-                throw new Error\JSONDecodingError('Unexpected control character found.');
+                throw new Error\JSONDecodingError(['message' => 'Unexpected control character found.']);
             case JSON_ERROR_SYNTAX:
-                throw new Error\JSONDecodingError('Syntax error.');
+                throw new Error\JSONDecodingError(['message' => 'Syntax error.']);
         }
 
         // For PHP version 5.3.3 or greater 
         if (version_compare(PHP_VERSION, '5.3.3') >= 0) {
             switch ($jsonLastError) {
                 case JSON_ERROR_UTF8:
-                    throw new Error\JSONDecodingError('Malformed UTF-8 characters, possibly incorrectly encoded.');
+                    throw new Error\JSONDecodingError(['message' => 'Malformed UTF-8 characters, possibly incorrectly encoded.']);
             }
         }
 
@@ -164,11 +158,11 @@ abstract class ResourceBase
         if (version_compare(PHP_VERSION, '5.5.0') >= 0) {
             switch ($jsonLastError) {
                 case JSON_ERROR_RECURSION:
-                    throw new Error\JSONDecodingError('One or more recursive references in the value to be encoded.');
+                    throw new Error\JSONDecodingError(['message' => 'One or more recursive references in the value to be encoded.']);
                 case JSON_ERROR_INF_OR_NAN:
-                    throw new Error\JSONDecodingError('One or more NAN or INF values in the value to be encoded.');
+                    throw new Error\JSONDecodingError(['message' => 'One or more NAN or INF values in the value to be encoded.']);
                 case JSON_ERROR_UNSUPPORTED_TYPE:
-                    throw new Error\JSONDecodingError('A value of a type that cannot be encoded was given.');
+                    throw new Error\JSONDecodingError(['message' => 'A value of a type that cannot be encoded was given.']);
             }
         }
 
@@ -176,13 +170,13 @@ abstract class ResourceBase
         if (version_compare(PHP_VERSION, '7.0.0') >= 0) {
             switch ($jsonLastError) {
                 case JSON_ERROR_INVALID_PROPERTY_NAME:
-                    throw new Error\JSONDecodingError('A property name that cannot be encoded was given.');
+                    throw new Error\JSONDecodingError(['message' => 'A property name that cannot be encoded was given.']);
                 case JSON_ERROR_UTF16:
-                    throw new Error\JSONDecodingError('Malformed UTF-16 characters, possibly incorrectly encoded.');
+                    throw new Error\JSONDecodingError(['message' => 'Malformed UTF-16 characters, possibly incorrectly encoded.']);
             }
         }
 
-        throw new Error\JSONDecodingError('Unknown error occurred while decoding the JSON response.');
+        throw new Error\JSONDecodingError(['message' => 'Unknown error occurred while decoding the JSON response.']);
     }
 
     /**
@@ -205,7 +199,8 @@ abstract class ResourceBase
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    protected static function throwRequestError($response) {
+    protected static function throwRequestError($response)
+    {
         if (!is_array($response)) {
             throw new \Exception('Unknown error occurred.');
         }
@@ -244,7 +239,7 @@ abstract class ResourceBase
                 throw new Error\UndefinedRequestParametersError($response);
 
             case 'invalid_request_parameters_error':
-                throw new Error\InvalidRequestParametersError( $response );
+                throw new Error\InvalidRequestParametersError($response);
 
             case 'json_decoding_error':
                 throw new Error\JSONDecodingError($response);
@@ -269,7 +264,8 @@ abstract class ResourceBase
      * @return mixed
      * @throws Error\InvalidPropertyException
      */
-    public function __get($k) {
+    public function __get($k)
+    {
         if (!empty($this->data) && array_key_exists($k, $this->data)) {
             return $this->data[$k];
         } else {
@@ -277,7 +273,8 @@ abstract class ResourceBase
                 'object'  => 'error',
                 'type'    => 'invalid_property_exception',
                 'status'  => 400,
-                'message' => "Invalid Property $k. This object only supports these properties: " . join(', ', $this->data) . ".\n",
+                'message' => "Invalid Property $k. This object only supports these properties: " . join(', ',
+                        $this->data) . ".\n",
             ));
         }
     }
@@ -286,12 +283,13 @@ abstract class ResourceBase
      * @param $k
      * @param $v
      */
-    public function __set($k, $v) {
+    public function __set($k, $v)
+    {
         if ($v === "") {
             throw new \InvalidArgumentException(
-                'You cannot set \''.$k.'\'to an empty string. '
-                .'We interpret empty strings as NULL in requests. '
-                .'You may set obj->'.$k.' = NULL to delete the property'
+                'You cannot set \'' . $k . '\'to an empty string. '
+                . 'We interpret empty strings as NULL in requests. '
+                . 'You may set obj->' . $k . ' = NULL to delete the property'
             );
         }
         // Storing new values in a different array instead of changing `$this->data`
@@ -301,14 +299,16 @@ abstract class ResourceBase
     /**
      * @return string
      */
-    public function toJSON() {
-        return Utils\toJSON( $this->data, 4, API::getIndentation() );
+    public function toJSON()
+    {
+        return Utils\toJSON($this->data, 4, API::getIndentation());
     }
 
     /**
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return get_class($this) . ' JSON: ' . $this->toJSON();
     }
 }
