@@ -100,7 +100,8 @@ abstract class ResourceBase
 
     protected static function getResourceURL($id = null)
     {
-        return '/' . self::$version . '/' . static::$url . ($id ? '/' . $id : '');
+        $router = API::getRouter();
+        return '/' . $router::getVersion() . '/' . static::$url . ($id ? '/' . $id : '');
     }
 
     /**

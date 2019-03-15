@@ -22,4 +22,11 @@ interface RouterInterface
      * @return mixed
      */
     public static function request($method, $uri, $bodyParams, $queryParams);
+
+    /**
+     * Retrieve the API version being used.
+     * 
+     * @return mixed
+     */
+    public static function getVersion();
 }

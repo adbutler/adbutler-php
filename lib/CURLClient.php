@@ -47,6 +47,14 @@ class CURLClient implements RouterInterface
             ));
         }
     }
+
+    /**
+     * @return mixed
+     */
+    public static function getVersion()
+    {
+        return self::$version;
+    }
     
     public static function defineUndefinedCURLErrorConstants() {
 
