@@ -3,23 +3,33 @@
 namespace AdButler;
 
 /**
- * @property-read  int id
- * @property-read  string object
- * @property-read  string self
- * @property       string name
- * @property       int width
- * @property       int height
- * @property       int publisher
- * @property       int popup_frequency
- * @property       int refresh_frequency
- * @property       int refresh_limit
- * @property       string responsive
- * @property       bool unique_delivery
+ * @property-read 	int     id
+ * @property-read 	string  object
+ * @property-read 	string  self
+ * @property 		int banner_id
+ * @property  		string resource_type
+ * @property 		string type
+ * @property 		int width
+ * @property 		int height
+ * @property 		int asset_width
+ * @property 		int asset_height
+ * @property 		bool scalable
+ * @property 		int expanded_width
+ * @property 		int expanded_height
+ * @property 		string api_framework
+ * @property 		string content
+ * @property 		string altText
+ * @property 		string dom_element_id
+ * @property 		int sequence
+ * @property 		int library_id
+ * @property 		string click_through_url
+ * @property 		encode_parameters
+ * @property 		ad_parameters
  */
-class BannerZone extends SingleResource
+class VASTCompanion extends SingleResource
 {
-    protected static $type = 'banner_zone';
-    protected static $url = 'zones/banner';
+    protected static $type = 'vast_companion';
+    protected static $url  = 'vast-companions';
 
     /*
      * Overridden Methods
@@ -30,7 +40,7 @@ class BannerZone extends SingleResource
      * @param array $bodyParams
      * @param array $queryParams
      *
-     * @return BannerZone
+     * @return VASTCompanion
      * @throws Error\APIConnectionError
      * @throws Error\APIError
      * @throws Error\InvalidAPIKeyError
@@ -49,16 +59,15 @@ class BannerZone extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function create($bodyParams = array(), $queryParams = array())
-    {
+    public static function create($bodyParams = array(), $queryParams = array()) {
         return parent::create($bodyParams, $queryParams);
     }
 
     /**
-     * @param int $id
+     * @param int   $id
      * @param array $queryParams
      *
-     * @return BannerZone
+     * @return VASTCompanion
      * @throws Error\APIConnectionError
      * @throws Error\APIError
      * @throws Error\InvalidAPIKeyError
@@ -77,25 +86,23 @@ class BannerZone extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieve($id, $queryParams = array())
-    {
+    public static function retrieve($id, $queryParams = array()) {
         return parent::retrieve($id, $queryParams);
     }
 
     /**
      * @param array $bodyParams
      *
-     * @return BannerZone
+     * @return VASTCompanion
      */
-    public function update($bodyParams = array())
-    {
+    public function update($bodyParams = array()) {
         return parent::update($bodyParams);
     }
 
     /**
      * @param array $queryParams
      *
-     * @return BannerZone
+     * @return VASTCompanion
      * @throws Error\APIConnectionError
      * @throws Error\APIError
      * @throws Error\InvalidAPIKeyError
@@ -114,8 +121,7 @@ class BannerZone extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function save($queryParams = array())
-    {
+    public function save($queryParams = array()) {
         return parent::save($queryParams);
     }
 
@@ -141,8 +147,7 @@ class BannerZone extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public function delete($queryParams = array())
-    {
+    public function delete($queryParams = array()) {
         return parent::delete($queryParams);
     }
 
@@ -168,8 +173,7 @@ class BannerZone extends SingleResource
      * @throws Error\UndefinedResponseError
      * @throws \Exception
      */
-    public static function retrieveAll($queryParams = array())
-    {
+    public static function retrieveAll($queryParams = array()) {
         return parent::retrieveAll($queryParams);
     }
 
@@ -177,20 +181,5 @@ class BannerZone extends SingleResource
      * Resource specific methods
      * =========================
      */
-
-    /**
-     * @param array $queryParams
-     *
-     * @return ZoneTag
-     * @throws \Exception
-     */
-    public function getTags($queryParams)
-    {
-        if (!is_null($this->id)) {
-            return ZoneTag::retrieve($this->id, $queryParams);
-        } else {
-            throw new \Exception("Fail");
-            //TODO: no zone ID, throw error!
-        }
-    }
 }
+
